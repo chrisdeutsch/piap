@@ -1,0 +1,124 @@
+﻿\documentclass[11pt, a4paper]{article}
+
+% Encoding
+\usepackage[utf8]{inputenc}
+
+% Hyphenation
+\usepackage[english]{babel}
+
+% Extended math environments
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+
+% Additional math fonts and symbols
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Units and uncertainties
+\usepackage{siunitx}
+\sisetup{
+    separate-uncertainty
+}
+
+% Margins
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm, twoside]{geometry}
+
+% Pictures
+\usepackage{graphicx}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    allcolors = {black}
+}
+
+% Better table layouts
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+
+% Page Header
+\usepackage{fancyhdr}
+
+% Float Barriers
+\usepackage{placeins}
+
+% Rotated figures
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{rotating}
+
+% Wrapped figures
+\usepackage{wrapfig}
+
+\usepackage{float}
+
+% Caption-Setup
+\captionsetup{font={small}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\thesubtable}{\alph{subtable}}
+
+% Depth of TOC (Level: 1 sections, 2 subsections, 3 subsubsections)
+\setcounter{tocdepth}{3}
+
+% FANCYHDR SETUP
+\pagestyle{fancy}
+\fancyhead[EL,OR]{\thepage}
+\fancyhead[ER]{\leftmark}
+\fancyhead[OL]{\rightmark}
+
+\renewcommand{\sectionmark}[1]{
+\markboth{\thesection{} #1}{\thesection{} #1}
+}
+\renewcommand{\subsectionmark}[1]{
+\markright{\thesubsection{} #1}
+}
+
+% Document Info
+\title{Particles in a potential}
+
+\author{Christopher Deutsch\footnote{christopher.deutsch@uni-bonn.de} \and Philip Hauer\footnote{philip.hauer@googlemail.com}}
+
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+
+\maketitle
+
+% ABSTRACT
+\begin{abstract}
+\noindent 
+We consider a set of two oppositely charged particles that interact via a two-particle potential in a finite volume.
+\end{abstract}
+
+\end{titlepage}
+
+% TABLE OF CONTENTS
+\tableofcontents
+% New page after TOC
+\newpage
+
+% CONTENT
+
+\section{Introduction}
+\subsection{Lorem ipsum}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet.
+
+
+\FloatBarrier
+% BIBLIOGRAPHY
+\vspace{\fill}
+\begin{thebibliography}{9}
+\bibitem{JPL}
+	Jet Propulsion Laboratory,
+	\emph{Small-Body Database Browser},\\
+	\url{http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=2004%20BL86;old=0;orb=0;cov=0;log=0;cad=0#orb} (Last access: 20. June 2015)
+\end{thebibliography}
+\end{document}
