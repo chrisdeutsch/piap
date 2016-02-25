@@ -1,0 +1,13 @@
+Requires:
+- CMake 3.3.0 or higher
+- C++14 compliant compiler
+
+How to build:
+
+mkdir build
+cd build
+
+(MinGW)
+cmake -G "MinGW Makefiles" ..
+mingw32-make
+piap.exe
