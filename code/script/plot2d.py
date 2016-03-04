@@ -8,10 +8,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("filename", help="filename of the state file")
     parser.add_argument("side_length", type=float, help="side length of the simulation box")
+    parser.add_argument("start", nargs="?", type=int, default=0, help="start sample of simulation")
+    parser.add_argument("step", nargs="?", type=int, default=1, help="samples per frame")
     args = parser.parse_args()
 
     def read_sample():
-        samples = np.loadtxt(args.filename)
+        samples = np.loadtxt(args.filename)[args.start::args.step,:]
 
         for sample in samples:
             reshaped = sample.reshape(-1, 3)
@@ -42,13 +44,3 @@ if __name__ == "__main__":
 
     ani = animation.FuncAnimation(fig, update, read_sample, interval=0)
     plt.show()
-
-
-
-
-
-
-
-
-
-
