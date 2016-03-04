@@ -42,5 +42,5 @@ if __name__ == "__main__":
         ellipse_pos.set_offsets(np.column_stack((x[idx_pos], y[idx_pos])))
         ellipse_neg.set_offsets(np.column_stack((x[idx_neg], y[idx_neg])))
 
-    ani = animation.FuncAnimation(fig, update, read_sample, interval=0)
+    ani = animation.FuncAnimation(fig, update, read_sample, interval=0, repeat=False)
     plt.show()
