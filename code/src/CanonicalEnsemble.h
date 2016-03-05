@@ -4,86 +4,105 @@
 #include <cmath>
 #include <functional>
 #include <random>
-#include <utility>
+#include <vector>
 
 /**
  * CanonicalEnsemble
  *
- * Simulation of a canonical ensemble at a specified temperature using a
- * Random-Walk Metropolis-Algorithm with customized Hamiltonian and proposal
- * function.
+ * Simulates a canonical ensemble at a specified temperature and potential using
+ * a Random-Walk Metropolis-Algorithm using a single particle update with a
+ * specified proposal distribution.
  */
-template <typename State>
+template <typename ParticleState>
 class CanonicalEnsemble {
 public:
     /**
-     * Hamiltonian of the system as a function of the realized state.
+     * Type specifying the state of the system.
      */
-    using Hamiltonian = std::function<double(const State &)>;
+    using State = std::vector<ParticleState>;
 
     /**
-     * Function proposing a new state from the current state "current"
-     * and saves it into "destination". "destination" is guaranteed to be a in a
-     * valid state.
-     *
-     * Signature: void(const State &current, State &destination)
+     * Type specifying the interparticle potential.
      */
-    using ProposalFunction = std::function<void(const State &, State &)>;
+    using PotentialFunction =
+        std::function<double(const ParticleState &, const ParticleState &)>;
+
+    /**
+     * Type of a function proposing a new state for a single particle from the
+     * current state.
+     */
+    using ProposalFunction =
+        std::function<ParticleState(const ParticleState &, std::mt19937 &)>;
 
 public:
     /**
-     * Constructor taking the system's Hamiltonian, the thermodynamic beta,
-     * a proposal function and the initial state of the simulation.
+     * Constructor taking the initial state of the simulation, thermodynamic
+     * beta, interparticle potential and proposal function.
      */
-    CanonicalEnsemble(Hamiltonian hamiltonian, double beta,
-                      ProposalFunction proposal_function,
-                      const State &initial_state)
-        : rng(std::random_device{}()), hamiltonian(hamiltonian),
-          proposal_function(proposal_function), current_state(initial_state),
-          proposed_state(initial_state), beta(beta),
-          current_energy(hamiltonian(initial_state)) {}
+    CanonicalEnsemble(const State &initial_state, double beta,
+                      PotentialFunction potential_func,
+                      ProposalFunction proposal_func)
+        : rng(std::random_device{}()), unif_index(0, initial_state.size() - 1),
+          potential_func(potential_func), proposal_func(proposal_func),
+          state(initial_state), beta(beta) {
+        state_energy = hamiltonian();
+    }
 
     /**
-     * Evaluates a single step of the Random-Walk Metropolis-Algorithm
-     *
-     * Returns a pair of the sampled state and a boolean indicating whether a
-     * new state was accepted.
+     * Returns a reference to the current state of the simulation.
      */
-    std::pair<State, bool> step() {
+    const State &get_state() const { return state; }
+
+    /**
+     * Executes a single step of the Random-Walk Metropolis-Algorithm
+     *
+     * returns: bool - indicating whether the step was accepted.
+     */
+    bool step() {
         // 1. Propose a new state
-        proposal_function(current_state, proposed_state);
+        const auto idx = unif_index(rng);
+        const auto current = state[idx];
+        state[idx] = proposal_func(current, rng);
 
         // 2. Accept-reject step
-        const auto proposed_energy = hamiltonian(proposed_state);
+        const auto proposed_energy = hamiltonian();
         const auto accept_prob =
-            std::exp(-beta * (proposed_energy - current_energy));
+            std::exp(-beta * (proposed_energy - state_energy));
 
-        // unif_dist: uniformly distributed in [0.0, 1.0)
-        const auto accepted = unif_dist(rng) < accept_prob;
+        const auto accepted = unif_real(rng) < accept_prob;
         if (accepted) {
-            std::swap(current_state, proposed_state);
-            current_energy = proposed_energy;
+            state_energy = proposed_energy;
+        } else {
+            state[idx] = current;
         }
-        return std::make_pair(current_state, accepted);
+        return accepted;
+    }
+
+private:
+    // TODO: Optimize this. For single particle updates the entire hamiltonian
+    //       does not have to be calculated.
+    double hamiltonian() const {
+        auto potential_energy = 0.0;
+        for (auto it = state.cbegin(), end = state.cend(); it != end; ++it) {
+            for (auto it2 = state.cbegin(); it2 != it; ++it2) {
+                potential_energy += potential_func(*it, *it2);
+            }
+        }
+        return potential_energy;
     }
 
 private:
     std::mt19937 rng;
-    std::uniform_real_distribution<> unif_dist;
+    std::uniform_real_distribution<double> unif_real;
+    std::uniform_int_distribution<typename State::size_type> unif_index;
 
-    Hamiltonian hamiltonian;
-    ProposalFunction proposal_function;
+    PotentialFunction potential_func;
+    ProposalFunction proposal_func;
 
-    State current_state;
-    State proposed_state;
+    State state;
+    double state_energy;
 
     double beta;
-
-    /**
-     * Since the evaluation of the Hamiltonian can be expensive, the energy of
-     * the current state is cached.
-     */
-    double current_energy;
 };
 
 #endif // CANONICALENSEMBLE_H_

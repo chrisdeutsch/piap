@@ -2,7 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "CanonicalEnsemble.h"
 
@@ -13,45 +12,17 @@ struct Particle2D {
     double y = 0.0;
 };
 
-using ParticleState = std::vector<Particle2D>;
-
-double
-hamiltonian_w_pot(const ParticleState &state,
-                  std::function<double(const Particle2D &a,
-                                       const Particle2D &b)> pot_energy) {
-    double epot = 0.0;
-    for (auto it = state.cbegin(), end = state.cend(); it != end; ++it) {
-        for (auto it2 = state.cbegin(); it2 != it; ++it2) {
-            epot += pot_energy(*it, *it2);
-        }
-    }
-    return epot;
-}
-
-// Put this in a class?
-double trunc_normal(double mean, double stddev, double lower, double upper) {
-    static std::mt19937 rng(std::random_device{}());
-    std::normal_distribution<> dist(mean, stddev);
-
-    auto rand = dist(rng);
-    while (rand < lower || rand > upper) {
-        rand = dist(rng);
-    }
-
-    return rand;
-}
-
 int main() {
     // Standard deviation of truncated normal distribution in proposal function
-    double proposal_stddev = 0.01;
+    double proposal_stddev = 0.1;
     // Side length of the box
-    double side_length = 12.0;
+    double side_length = 15.0;
     // Number of oppositely charged particle pairs
-    unsigned particle_num = 25;
+    unsigned particle_num = 20;
     // Thermodynamic beta
-    double beta = 200.0;
+    double beta = 300.0;
     // Number of samples
-    std::size_t sample_num = 10000;
+    std::size_t sample_num = 100000;
     // Output
     bool save_output = true;
     std::string filename = "out.tsv";
@@ -64,32 +35,32 @@ int main() {
         return a.q * b.q / distance + std::pow(distance, -8.0);
     };
 
-    // Hamiltonian with Coulomb potential and hard cores
-    using namespace std::placeholders;
-    auto hamiltonian = std::bind(hamiltonian_w_pot, _1, coulomb_w_core);
+    // Proposal Function
+    auto proposal_function = [side_length, proposal_stddev](
+        const Particle2D &particle, std::mt19937 &rng) {
+        auto ret = particle;
+        const auto upper = side_length / 2.0;
+        const auto lower = -upper;
 
-    // Proposal function
-    auto proposal_fun = [=](const ParticleState &current,
-                            ParticleState &destination) {
-        auto curr_it = current.cbegin(), curr_end = current.cend();
-        auto dest_it = destination.begin();
+        std::normal_distribution<> dist_x(particle.x, proposal_stddev);
+        std::normal_distribution<> dist_y(particle.y, proposal_stddev);
 
-        while (curr_it != curr_end) {
-            dest_it->q = curr_it->q;
-            dest_it->x = trunc_normal(curr_it->x, proposal_stddev,
-                                      -side_length / 2.0, side_length / 2.0);
-            dest_it->y = trunc_normal(curr_it->y, proposal_stddev,
-                                      -side_length / 2.0, side_length / 2.0);
+        do {
+            ret.x = dist_x(rng);
+        } while (ret.x < lower || ret.x > upper);
 
-            ++curr_it;
-            ++dest_it;
-        }
+        do {
+            ret.y = dist_y(rng);
+        } while (ret.y < lower || ret.y > upper);
+
+        return ret;
     };
 
     // Randomize initial state
-    ParticleState initial_state;
+    using Ensemble = CanonicalEnsemble<Particle2D>;
 
     std::mt19937 rng(std::random_device{}());
+    Ensemble::State initial_state;
     std::uniform_real_distribution<> unif(-side_length / 2.0,
                                           side_length / 2.0);
 
@@ -100,22 +71,16 @@ int main() {
 
     // Simulate samples of the canonical ensemble using the Random-Walk
     // Metropolis-Algorithm
-    CanonicalEnsemble<ParticleState> rw_metro(hamiltonian, beta, proposal_fun,
-                                              initial_state);
-    std::vector<ParticleState> samples;
+    Ensemble ensemble(initial_state, beta, coulomb_w_core, proposal_function);
+    std::vector<Ensemble::State> samples;
     samples.reserve(sample_num);
 
-    ParticleState state;
-    bool accepted;
     std::size_t accepted_cnt = 0;
-
     for (std::size_t i = 0; i < sample_num; ++i) {
-        std::tie(state, accepted) = rw_metro.step();
-        samples.push_back(std::move(state));
-
-        if (accepted) {
+        if (ensemble.step()) {
             ++accepted_cnt;
         }
+        samples.push_back(ensemble.get_state());
     }
 
     std::cout << "Acceptance probability: "
