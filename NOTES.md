@@ -1,3 +1,7 @@
+# TODO
+- [ ] Parameter für die Simulation herausfinden
+- [ ] Eichkurve für die Akzeptanz
+
 # Phasenübergänge
 
 * flüssig: beta = 100
