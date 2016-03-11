@@ -21,5 +21,5 @@ set(SOURCES_3D
 
 add_executable(coulomb3d ${SOURCES_3D})
 
-set_property(TARGET coulomb2d PROPERTY CXX_STANDARD 14)
-set_property(TARGET coulomb2d PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET coulomb3d PROPERTY CXX_STANDARD 14)
+set_property(TARGET coulomb3d PROPERTY CXX_STANDARD_REQUIRED ON)
