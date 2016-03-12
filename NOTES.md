@@ -2,12 +2,23 @@
 - [ ] Parameter für die Simulation herausfinden
 - [ ] Eichkurve für die Akzeptanz
 
-# Phasenübergänge
 
-* flüssig: beta = 100
-* fest:
+# Parameterbereich
+- beta: ??? (1 - 400)
+- Boxlänge: 
+    - 15 gut für Kristall
+    - gasförmig?
 
-# Wahl der Parameter für die Simulation
-Blablabla *bold*
 
-# Eichkurve für Akzeptanz
+# Alternative Proposal Distributions
+- Uniform in Kugel um Teilchenposition
+- Uniform auf Kugelschale um Teilchenposition (eher nicht)
+
+
+# Resultate für Protokoll
+
+Bilder für das Protokoll:
+- [ ] Kristall / Festkörper
+- [ ] Flüssig
+- [ ] Molekulargas
+- [ ] Ionengas
