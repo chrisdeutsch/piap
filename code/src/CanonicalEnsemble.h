@@ -44,9 +44,7 @@ public:
                       ProposalFunction proposal_func)
         : rng(std::random_device{}()), unif_index(0, initial_state.size() - 1),
           potential_func(potential_func), proposal_func(proposal_func),
-          state(initial_state), beta(beta) {
-        state_energy = hamiltonian();
-    }
+          state(initial_state), beta(beta) {}
 
     /**
      * Returns a reference to the current state of the simulation.
@@ -59,33 +57,38 @@ public:
      * returns: bool - indicating whether the step was accepted.
      */
     bool step() {
-        // 1. Propose a new state
+        // 0. Choose particle at random and calculate its potential
         const auto idx = unif_index(rng);
+        const auto current_pot = potential(idx);
+
+        // 1. Propose a new state for the chosen particle and calculate the new
+        //    potential
         const auto current = state[idx];
         state[idx] = proposal_func(current, rng);
+        const auto proposed_pot = potential(idx);
 
         // 2. Accept-reject step
-        const auto proposed_energy = hamiltonian();
-        const auto accept_prob =
-            std::exp(-beta * (proposed_energy - state_energy));
+        const auto accept_prob = std::exp(-beta * (proposed_pot - current_pot));
 
         const auto accepted = unif_real(rng) < accept_prob;
-        if (accepted) {
-            state_energy = proposed_energy;
-        } else {
+        if (!accepted) {
+            // Revert proposal
             state[idx] = current;
         }
         return accepted;
     }
 
 private:
-    // TODO: Optimize this. For single particle updates the entire hamiltonian
-    //       does not have to be calculated.
-    double hamiltonian() const {
+    /**
+     * Calculates the potential of the specified particle
+     */
+    double potential(typename State::size_type ix) const {
+        const auto p = state.cbegin() + ix;
         auto potential_energy = 0.0;
+
         for (auto it = state.cbegin(), end = state.cend(); it != end; ++it) {
-            for (auto it2 = state.cbegin(); it2 != it; ++it2) {
-                potential_energy += potential_func(*it, *it2);
+            if (it != p) {
+                potential_energy += potential_func(*it, *p);
             }
         }
         return potential_energy;
@@ -100,7 +103,6 @@ private:
     ProposalFunction proposal_func;
 
     State state;
-    double state_energy;
 
     double beta;
 };
