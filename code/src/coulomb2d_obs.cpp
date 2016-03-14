@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cstddef>
 #include <fstream>
 #include <future>
@@ -22,6 +23,7 @@ std::pair<double, double> calc_obs(double beta, double sigma, double width,
                       prop_func);
 
     std::size_t acceptance_cnt = 0;
+    std::size_t expect_cnt = 0;
     double expect_val = 0.0;
 
     // Burn-in (TODO: make variable)
@@ -34,9 +36,12 @@ std::pair<double, double> calc_obs(double beta, double sigma, double width,
         if (ensemble.step()) {
             ++acceptance_cnt;
         }
-        expect_val += avg_pair_dist(ensemble.get_state());
+        if (i % 20 == 0) {
+            ++expect_cnt;
+            expect_val += avg_pair_dist(ensemble.get_state());
+        }
     }
-    return std::make_pair(expect_val / n_samples,
+    return std::make_pair(expect_val / expect_cnt,
                           static_cast<double>(acceptance_cnt) / n_samples);
 }
 
@@ -64,6 +69,8 @@ int main() {
 
     os << "beta,acc,obs\n";
 
+    const auto start = std::chrono::high_resolution_clock::now();
+
     double beta = 1.0;
     while (beta < 400.0) {
         std::cout << "beta: " << beta << std::endl;
@@ -71,11 +78,11 @@ int main() {
 
         for (int i = 0; i < 33; ++i) {
             auto calc1 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 10000);
+                                    gauge_curve(beta), 15.0, 20, 800000);
             auto calc2 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 10000);
+                                    gauge_curve(beta), 15.0, 20, 800000);
             auto calc3 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 10000);
+                                    gauge_curve(beta), 15.0, 20, 800000);
 
             std::tie(avg_pair_d, acceptance) = calc1.get();
             os << beta << "," << acceptance << "," << avg_pair_d << "\n";
@@ -88,6 +95,13 @@ int main() {
         }
         beta *= 1.06;
     }
+
+    const auto end = std::chrono::high_resolution_clock::now();
+
+    auto elapsed =
+        std::chrono::duration_cast<std::chrono::minutes>(end - start);
+
+    std::cout << "Runtime: " << elapsed.count() << " min" << std::endl;
 
     return 0;
 }
