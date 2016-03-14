@@ -109,25 +109,26 @@ int main() {
         } else {
             return 0.082;
         }
-    }
+    };
 
     std::ofstream os("observables.csv");
 
     os << "beta,acc,obs\n";
 
+    const auto start = std::chrono::high_resolution_clock::now();
 
     double beta = 1.0;
     while (beta < 400.0) {
         std::cout << "beta: " << beta << std::endl;
         double avg_pair_d, acceptance;
 
-        for (int i = 0; i < 33; ++i) {
+        for (int i = 0; i < 20; ++i) {
             auto calc1 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 800000);
+                                    gauge_curve_unif(beta), 15.0, 20, 300000);
             auto calc2 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 800000);
+                                    gauge_curve_unif(beta), 15.0, 20, 300000);
             auto calc3 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve(beta), 15.0, 20, 800000);
+                                    gauge_curve_unif(beta), 15.0, 20, 300000);
 
             std::tie(avg_pair_d, acceptance) = calc1.get();
             os << beta << "," << acceptance << "," << avg_pair_d << "\n";
