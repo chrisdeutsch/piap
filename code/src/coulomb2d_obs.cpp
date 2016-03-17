@@ -1,5 +1,6 @@
 #include <chrono>
 #include <cstddef>
+#include <ctime>
 #include <fstream>
 #include <future>
 #include <iostream>
@@ -46,89 +47,61 @@ std::pair<double, double> calc_obs(double beta, double sigma, double width,
 }
 
 int main() {
-    // First test generating observables
-    auto gauge_curve = [](double beta) {
-        if (beta >= 1.0 && beta < 10.0) {
-            return 3.0 + (1.0 - 3.0) / (10. - 1.) * (beta - 1.0);
-        } else if (beta >= 10.0 && beta < 30.0) {
-            return 1.0 + (0.4 - 1.0) / (30. - 10.) * (beta - 10.0);
-        } else if (beta >= 30.0 && beta < 85.0) {
-            return 0.4 + (0.25 - 0.4) / (85. - 30.) * (beta - 30.0);
-        } else if (beta >= 85.0 && beta < 100.0) {
-            return 0.25 + (0.2 - 0.25) / (100. - 85.) * (beta - 85.0);
-        } else if (beta >= 100.0 && beta < 200.0) {
-            return 0.2 + (0.15 - 0.2) / (200. - 100.) * (beta - 100.0);
-        } else if (beta >= 200.0 && beta < 300.0) {
-            return 0.15 + (0.1 - 0.15) / (300. - 200.) * (beta - 200.0);
-        } else {
-            return 0.1;
+    auto gauge_curve_unif_30 = [](double beta) {
+        if (beta >= 1.0 && beta < 5.0) {
+            return 2.0;
+        }
+        else if (beta >= 5.0 && beta < 10.0) {
+            return 2.0 + (1.4 - 2.0) / (10.0 - 5.0) * (beta - 5.0);
+        }
+        else if (beta >= 10.0 && beta < 20.0) {
+            return 1.4 + (0.85 - 1.4) / (20.0 - 10.0) * (beta - 10.0);
+        }
+        else if (beta >= 20.0 && beta < 40.0) {
+            return 0.85 + (0.5 - 0.85) / (40.0 - 20.0) * (beta - 20.0);
+        }
+        else if (beta >= 40.0 && beta < 80.0) {
+            return 0.5 + (0.3 - 0.5) / (80.0 - 40.0) * (beta - 40.0);
+        }
+        else if (beta >= 80.0 && beta < 160.0) {
+            return 0.3 + (0.22 - 0.3) / (160.0 - 80.0) * (beta - 80.0);
+        }
+        else if (beta >= 160.0 && beta < 220.0) {
+            return 0.22 + (0.18 - 0.22) / (220.0 - 160.0) * (beta - 160.0);
+        }
+        else if (beta >= 220.0 && beta < 380.0) {
+            return 0.18 + (0.14 - 0.18) / (380.0 - 220.0) * (beta - 220.0);
+        }
+        else if (beta >= 380.0 && beta < 500.0) {
+            return 0.14 + (0.12 - 0.14) / (500.0 - 380.0) * (beta - 380.0);
+        }
+        else {
+            return 0.12;
         }
     };
 
-    auto gauge_curve_unif = [](double beta) {
-        if (beta >= 1.0 && beta < 2.0) {
-            return 2.0 + (1.65 - 2.0) / (2. - 1.) * (beta - 1.0);
-        } else if (beta >= 2.0 && beta < 3.0) {
-            return 1.65 + (1.4 - 1.65) / (3. - 2.) * (beta - 2.0);
-        } else if (beta >= 3.0 && beta < 5.0) {
-            return 1.4 + (1.1 - 1.4) / (5. - 3.) * (beta - 3.0);
-        } else if (beta >= 5.0 && beta < 8.0) {
-            return 1.1 + (0.85 - 1.1) / (8. - 5.) * (beta - 5.0);
-        } else if (beta >= 8.0 && beta < 10.0) {
-            return 0.85 + (0.75 - 0.85) / (10. - 8.) * (beta - 8.0);
-        } else if (beta >= 10.0 && beta < 15.0) {
-            return 0.75 + (0.58 - 0.75) / (15. - 10.) * (beta - 10.0);
-        } else if (beta >= 15.0 && beta < 20.0) {
-            return 0.58 + (0.47 - 0.58) / (20. - 15.) * (beta - 15.0);
-        } else if (beta >= 20.0 && beta < 30.0) {
-            return 0.47 + (0.35 - 0.47) / (30. - 20.) * (beta - 20.0);
-        } else if (beta >= 30.0 && beta < 40.0) {
-            return 0.35 + (0.3 - 0.35) / (40. - 30.) * (beta - 30.0);
-        } else if (beta >= 40.0 && beta < 50.0) {
-            return 0.3 + (0.26 - 0.3) / (50. - 40.) * (beta - 40.0);
-        } else if (beta >= 50.0 && beta < 70.0) {
-            return 0.26 + (0.21 - 0.26) / (70. - 50.) * (beta - 50.0);
-        } else if (beta >= 70.0 && beta < 90.0) {
-            return 0.21 + (0.18 - 0.21) / (90. - 70.) * (beta - 70.0);
-        } else if (beta >= 90.0 && beta < 120.0) {
-            return 0.18 + (0.15 - 0.18) / (120. - 90.) * (beta - 90.0);
-        } else if (beta >= 120.0 && beta < 150.0) {
-            return 0.15 + (0.135 - 0.15) / (150. - 120.) * (beta - 120.0);
-        } else if (beta >= 150.0 && beta < 180.0) {
-            return 0.135 + (0.12 - 0.135) / (180. - 150.) * (beta - 150.0);
-        } else if (beta >= 180.0 && beta < 220.0) {
-            return 0.12 + (0.11 - 0.12) / (220. - 180.) * (beta - 180.0);
-        } else if (beta >= 220.0 && beta < 250.0) {
-            return 0.11 + (0.105 - 0.11) / (250. - 220.) * (beta - 220.0);
-        } else if (beta >= 250.0 && beta < 300.0) {
-            return 0.105 + (0.095 - 0.105) / (300. - 250.) * (beta - 250.0);
-        } else if (beta >= 300.0 && beta < 350.0) {
-            return 0.095 + (0.09 - 0.095) / (350. - 300.) * (beta - 300.0);
-        } else if (beta >= 350.0 && beta < 400.0) {
-            return 0.09 + (0.082 - 0.09) / (400. - 350.) * (beta - 350.0);
-        } else {
-            return 0.082;
-        }
-    };
+    std::ofstream os("observables.csv", std::ofstream::app);
 
-    std::ofstream os("observables.csv");
-
-    os << "beta,acc,obs\n";
-
+    // Timing
     const auto start = std::chrono::high_resolution_clock::now();
+    const auto time = std::time(nullptr);
+
+    // Table header
+    os << "# Start of simulation: " << std::ctime(&time); 
+    os << "# beta,acc,obs\n" << std::flush;
 
     double beta = 1.0;
-    while (beta < 400.0) {
+    while (beta < 500.0) {
         std::cout << "beta: " << beta << std::endl;
         double avg_pair_d, acceptance;
 
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 5; ++i) {
             auto calc1 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif(beta), 15.0, 20, 300000);
+                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
             auto calc2 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif(beta), 15.0, 20, 300000);
+                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
             auto calc3 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif(beta), 15.0, 20, 300000);
+                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
 
             std::tie(avg_pair_d, acceptance) = calc1.get();
             os << beta << "," << acceptance << "," << avg_pair_d << "\n";
@@ -138,15 +111,15 @@ int main() {
 
             std::tie(avg_pair_d, acceptance) = calc3.get();
             os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+
+            os << std::flush;
         }
-        beta *= 1.06;
+        beta *= 1.04;
     }
 
     const auto end = std::chrono::high_resolution_clock::now();
-
-    auto elapsed =
+    const auto elapsed =
         std::chrono::duration_cast<std::chrono::minutes>(end - start);
-
     std::cout << "Runtime: " << elapsed.count() << " min" << std::endl;
 
     return 0;
