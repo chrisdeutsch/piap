@@ -3,7 +3,9 @@
 #include <ctime>
 #include <fstream>
 #include <future>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include "Common.h"
@@ -80,47 +82,56 @@ int main() {
         }
     };
 
-    std::ofstream os("observables.csv", std::ofstream::app);
 
-    // Timing
-    const auto start = std::chrono::high_resolution_clock::now();
-    const auto time = std::time(nullptr);
+    while (true) {
+        // Timing
+        const auto start = std::chrono::high_resolution_clock::now();
 
-    // Table header
-    os << "# Start of simulation: " << std::ctime(&time); 
-    os << "# beta,acc,obs\n" << std::flush;
+        // Get timestamp
+        const auto time = std::time(nullptr);
+        std::stringstream ss;
+        ss << std::put_time(std::localtime(&time), "%Y_%m_%d_%H_%M_%S");
+        ss << ".csv";
 
-    double beta = 1.0;
-    while (beta < 500.0) {
-        std::cout << "beta: " << beta << std::endl;
-        double avg_pair_d, acceptance;
+        std::ofstream os(ss.str());
 
-        for (int i = 0; i < 5; ++i) {
-            auto calc1 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
-            auto calc2 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
-            auto calc3 = std::async(std::launch::async, calc_obs, beta,
-                                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
+        // Table header
+        os << "# Start of simulation: " << std::ctime(&time);
+        os << "beta,acc,obs\n" << std::flush;
 
-            std::tie(avg_pair_d, acceptance) = calc1.get();
-            os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+        // Simulation
+        double beta = 1.0;
+        while (beta < 500.0) {
+            std::cout << "beta: " << beta << std::endl;
+            double avg_pair_d, acceptance;
 
-            std::tie(avg_pair_d, acceptance) = calc2.get();
-            os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+            for (int i = 0; i < 5; ++i) {
+                auto calc1 = std::async(std::launch::async, calc_obs, beta,
+                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
+                auto calc2 = std::async(std::launch::async, calc_obs, beta,
+                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
+                auto calc3 = std::async(std::launch::async, calc_obs, beta,
+                    gauge_curve_unif_30(beta), 15.0, 20, 1000000);
 
-            std::tie(avg_pair_d, acceptance) = calc3.get();
-            os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+                std::tie(avg_pair_d, acceptance) = calc1.get();
+                os << beta << "," << acceptance << "," << avg_pair_d << "\n";
 
-            os << std::flush;
+                std::tie(avg_pair_d, acceptance) = calc2.get();
+                os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+
+                std::tie(avg_pair_d, acceptance) = calc3.get();
+                os << beta << "," << acceptance << "," << avg_pair_d << "\n";
+
+                os << std::flush;
+            }
+            beta *= 1.04;
         }
-        beta *= 1.04;
-    }
 
-    const auto end = std::chrono::high_resolution_clock::now();
-    const auto elapsed =
-        std::chrono::duration_cast<std::chrono::minutes>(end - start);
-    std::cout << "Runtime: " << elapsed.count() << " min" << std::endl;
+        const auto end = std::chrono::high_resolution_clock::now();
+        const auto elapsed =
+            std::chrono::duration_cast<std::chrono::minutes>(end - start);
+        std::cout << "Runtime: " << elapsed.count() << " min" << std::endl;
+    }
 
     return 0;
 }
