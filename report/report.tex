@@ -26,6 +26,9 @@
 % Pictures
 \usepackage{graphicx}
 
+% Text color
+\usepackage{color}
+
 % Hyperlinks
 \usepackage{hyperref}
 \hypersetup{
@@ -56,6 +59,31 @@
 
 % Remarks
 \newcommand{\remark}[1]{{\color{red}(#1)}}
+
+% Code
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\footnotesize\ttfamily},
+	numbers=left,
+	numbersep=4pt,
+	numberstyle=\tiny\color{black},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=4,
+	xleftmargin=1em,
+	xrightmargin=0.8em
+}
 
 % Caption-Setup
 \captionsetup{font={small}}
@@ -173,6 +201,7 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 \section{Implementation}
 
 
+
 \section{Temperature dependence} \label{Sec:Temperature}
 
 \begin{figure}
@@ -185,6 +214,8 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 \section{Visualization} \label{Sec:Visualisation}
 \section{Further Analysis} \label{Sec:Further_Analysis}
 
+
+
 \FloatBarrier
 % BIBLIOGRAPHY
 \vspace{\fill}
@@ -194,4 +225,13 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 	\emph{Statistische Mechanik},
 	Springer, Berlin, 3rd edition 2006.
 \end{thebibliography}
+
+\begin{appendix}
+	\newpage
+	\section{Source code}
+	The full source code can be found on \url{https://github.com/chrisieh/piap} (a \texttt{C++14} compliant compiler is needed).
+	\subsection{CanonicalEnsemble{.}h} \label{sec:canonical_ensemble_source}
+	\lstinputlisting[language=C++]{./data/CanonicalEnsemble.tex}
+\end{appendix}
+
 \end{document}
