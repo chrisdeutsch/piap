@@ -54,6 +54,9 @@
 
 \usepackage{float}
 
+% Remarks
+\newcommand{\remark}[1]{{\color{red}(#1)}}
+
 % Caption-Setup
 \captionsetup{font={small}}
 \renewcommand{\thefigure}{\thesection.\arabic{figure}}
@@ -112,14 +115,17 @@ V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| 
 \end{equation}
 For the analysis we use a Random-Walk Metropolis algorithm which will be explained in chapter \ref{Sec:Metropolis}. The used algorithm depends on the temperature and we study this dependence in chapter \ref{Sec:Temperature}. As an indicator for the phase of the system we monitor the average pair distance. A visualization of the different phases was also done and can be found in the section \ref{Sec:Visualisation}. In addition to that we did some further research with other potentials (e.g. Lennard-Jones potential) and we simulated the system in three dimensions. These further thoughts and results are explained in chapter \ref{Sec:Further_Analysis}.
 
-\section{Canonical ensemble} \label{Sec:Canonical_Ensemble}
+
+\section{Background}
+
+\subsection{Canonical ensemble} \label{Sec:Canonical_Ensemble}
 
 The statistical ensemble describing a fixed number of particles~$N$ in a given volume~$V$, which is in thermal equilibrium with a heat bath of temperature~$T$, is the canonical ensemble.
 Aim of this project is to sample states from a given ensemble with fixed $N, V, T$ and use these to calculate expectation values of certain observables.
 For this the probability density for realizing a specific microstate of the ensemble needs to be known.
 In statistical mechanics the probability density for a canonical ensemble to be in a microstate with energy eigenvalue~$E$ is given by \cite{schwabl}
 \begin{align*}
-	P = \frac{1}{Z} \exp\left[ -\beta E \right]
+	P = \frac{1}{Z} \exp\left[ -\beta E \right] \qquad \beta := \frac{1}{k_\mathrm{B} T}
 \end{align*}
 with the normalization factor $1/Z$, where $Z$ is the canonical partition function.
 For a system of particles with an inter-particle potential~$V_{ij}$ and neglecting kinetic energies the canonical partition function
@@ -128,12 +134,43 @@ For a system of particles with an inter-particle potential~$V_{ij}$ and neglecti
 \end{align*}
 is a constant of the ensemble and the total energy of the system is
 \begin{align*}
-	E = \sum_{i < j} V_{ij} \text{.}
+	E = \sum_{i < j} V_{ij} \, \text{.}
 \end{align*}
 Since the calculation of $Z$ is computationally expensive a sampling method without the need of a normalized probability density is desirable.
 One such method is sampling using the Metropolis algorithm, which is introduced in the following section.
 
-\section{Metropolis algorithm} \label{Sec:Metropolis}
+
+\subsection{Metropolis algorithm} \label{Sec:Metropolis}
+The Metropolis algorithm is a Markov-chain Monte-Carlo method for generating an autocorrelated sequence of random samples of a given probability distribution.
+These samples can be used to approximate distributions for which direct sampling methods cannot be employed. \remark{Hier mehr?}
+Hereafter a summary of the algorithm is given.\\
+
+\noindent\textbf{Random-Walk Metropolis algorithm:}\\
+For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random samples~$\left( x_n \right)$ can be obtained using the following steps:
+\begin{enumerate}
+	\item \textbf{Trial change:}
+		Propose a new state $y$ according to a symmetric proposal distribution $q(Y|x_n)$ dependent on the current state $x_n$.
+		
+	\item \textbf{Accept-reject step:}
+		Calculate the acceptance probability
+		\begin{align*}
+			\alpha(x, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
+		\end{align*}
+		Generate $u \sim \mathcal{U}(0, 1)$ and set the random sample~$x_{n+1}$ according to:
+		\begin{align*}
+			x_{n+1} = \begin{cases}
+					y_n \,, & u \leq \alpha(x_n, y_n) \\
+					x_n \,, & u > \alpha(x_n, y_n)
+				\end{cases}
+		\end{align*}
+		
+	\item \textbf{Repeat}
+\end{enumerate}
+Moreover the target density~$P(x)$ does not need to be normalized, since it only occurs as a fraction of densities in the accept-reject step.
+Therefore this algorithm is suitable to sample from a canonical ensemble without the explicit calculation of the canonical partition function.
+
+
+\section{Implementation}
 
 
 \section{Temperature dependence} \label{Sec:Temperature}
