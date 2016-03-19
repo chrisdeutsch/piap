@@ -112,9 +112,31 @@ V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| 
 \end{equation}
 For the analysis we use a Random-Walk Metropolis algorithm which will be explained in chapter \ref{Sec:Metropolis}. The used algorithm depends on the temperature and we study this dependence in chapter \ref{Sec:Temperature}. As an indicator for the phase of the system we monitor the average pair distance. A visualization of the different phases was also done and can be found in the section \ref{Sec:Visualisation}. In addition to that we did some further research with other potentials (e.g. Lennard-Jones potential) and we simulated the system in three dimensions. These further thoughts and results are explained in chapter \ref{Sec:Further_Analysis}.
 
-\section{Canonical Ensemble} \label{Sec:Canonical_Ensemble}
-\section{Metropolis-Algorithm} \label{Sec:Metropolis}
-\section{Temperature Dependence} \label{Sec:Temperature}
+\section{Canonical ensemble} \label{Sec:Canonical_Ensemble}
+
+The statistical ensemble describing a fixed number of particles~$N$ in a given volume~$V$, which is in thermal equilibrium with a heat bath of temperature~$T$, is the canonical ensemble.
+Aim of this project is to sample states from a given ensemble with fixed $N, V, T$ and use these to calculate expectation values of certain observables.
+For this the probability density for realizing a specific microstate of the ensemble needs to be known.
+In statistical mechanics the probability density for a canonical ensemble to be in a microstate with energy eigenvalue~$E$ is given by \cite{schwabl}
+\begin{align*}
+	P = \frac{1}{Z} \exp\left[ -\beta E \right]
+\end{align*}
+with the normalization factor $1/Z$, where $Z$ is the canonical partition function.
+For a system of particles with an inter-particle potential~$V_{ij}$ and neglecting kinetic energies the canonical partition function
+\begin{align*}
+	Z = \int \prod_{i=1}^N \mathrm{d}\mathbf{r}_i \exp\left[ -\beta \sum_{i < j} V_{ij} \right]
+\end{align*}
+is a constant of the ensemble and the total energy of the system is
+\begin{align*}
+	E = \sum_{i < j} V_{ij} \text{.}
+\end{align*}
+Since the calculation of $Z$ is computationally expensive a sampling method without the need of a normalized probability density is desirable.
+One such method is sampling using the Metropolis algorithm, which is introduced in the following section.
+
+\section{Metropolis algorithm} \label{Sec:Metropolis}
+
+
+\section{Temperature dependence} \label{Sec:Temperature}
 
 \begin{figure}
 	\centering
@@ -130,9 +152,9 @@ For the analysis we use a Random-Walk Metropolis algorithm which will be explain
 % BIBLIOGRAPHY
 \vspace{\fill}
 \begin{thebibliography}{9}
-\bibitem{JPL}
-	Jet Propulsion Laboratory,
-	\emph{Small-Body Database Browser},\\
-	\url{http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=2004%20BL86;old=0;orb=0;cov=0;log=0;cad=0#orb} (Last access: 20. June 2015)
+\bibitem{schwabl}
+	F. Schwabl,
+	\emph{Statistische Mechanik},
+	Springer, Berlin, 3rd edition 2006.
 \end{thebibliography}
 \end{document}
