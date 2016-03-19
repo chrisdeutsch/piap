@@ -57,17 +57,17 @@ public:
      * returns: bool - indicating whether the step was accepted.
      */
     bool step() {
-        // 0. Choose particle at random and calculate its potential
+        // 1. Choose particle at random and calculate its potential
         const auto idx = unif_index(rng);
         const auto current_pot = potential(idx);
 
-        // 1. Propose a new state for the chosen particle and calculate the new
+        // 2. Propose a new state for the chosen particle and calculate the new
         //    potential
         const auto current = state[idx];
         state[idx] = proposal_func(current, rng);
         const auto proposed_pot = potential(idx);
 
-        // 2. Accept-reject step
+        // 3. Accept-reject step
         const auto accept_prob = std::exp(-beta * (proposed_pot - current_pot));
 
         const auto accepted = unif_real(rng) < accept_prob;

@@ -181,9 +181,10 @@ For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random 
 		
 	\item \textbf{Accept-reject step:}
 		Calculate the acceptance probability
-		\begin{align*}
+		\begin{align}
 			\alpha(x, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
-		\end{align*}
+			\label{eq:acceptance_probability}
+		\end{align}
 		Generate $u \sim \mathcal{U}(0, 1)$ and set the random sample~$x_{n+1}$ according to:
 		\begin{align*}
 			x_{n+1} = \begin{cases}
@@ -199,7 +200,68 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 
 
 \section{Implementation}
+For the simulations of the canonical ensemble the programming language \texttt{C++} was used.
+In the following a summary of the core implementation details is given.
 
+\subsection{Metropolis algorithm}
+Since the subject of this project requires the simulation of particles in two or three dimensions and different inter-particle potentials, a generic approach of implementing the algorithmic core was chosen.
+The source code of the implementation is listed in appendix~\ref{sec:canonical_ensemble_source}.
+
+The Metropolis algorithm is encapsulated in a class-template~\texttt{CanonicalEnsemble} taking a parameter \texttt{ParticleState} indicating the type used to describe the state of one particle.
+For the case of two-dimensional charged particles this could be a \texttt{struct} containing three floating point members describing the particle charge~$q$ and two coordinates~$x, y$.
+Each object of type \texttt{CanonicalEnsemble} has several important (inaccessible) members associated with it:
+\begin{itemize}
+	\item \texttt{state}:
+		A dynamically allocated array of type \texttt{ParticleState} fully describing the state of the ensemble (i.e.\ the charges and coordinates of all particles).
+		The current state can be queried using the \texttt{get\_state} member-function.
+	
+	\item \texttt{beta}:
+		The thermodynamic beta~$\beta = (k_\mathrm{B} T)^{-1}$ of the heat bath associated with the canonical ensemble.
+	
+	\item \texttt{potential\_func}:
+		A function object taking two particles and returning their inter-particle potential.
+	
+	\item \texttt{proposal\_func}:
+		A function object taking a particle and a random number generator, which returns a new particle according to a user-defined proposal distribution.
+\end{itemize}
+These members are assigned at construction-time of a \texttt{CanonicalEnsemble}-object and therefore allow for full customization of the considered problem.
+The underlying Metropolis algorithm is implemented in the \texttt{step} member-function:
+\lstinputlisting[language=C++, firstline=59, lastline=79]{../code/src/CanonicalEnsemble.h}
+In the following a detailed description of the implemented algorithm shall be given.
+\begin{enumerate}
+	\item
+		A random particle of the currently realized state is selected using a uniform distribution of indices.
+		The contribution to the total potential energy~$V$ of the chosen particle~$V_j$ is calculated using a helper-function \texttt{potential} according to
+		\begin{align*}
+			V_j = \sum_{\substack{i = 1 \\ i \neq j}}^N V_{ij}
+		\end{align*}
+		with the inter-particle potential $V_{ij}$ as specified in \texttt{potential\_func}.
+		
+	\item
+		The state of the selected particle is saved and a trial change of the current state is made using the proposal distribution as implemented in \texttt{proposal\_func} (further details in section \remark{REF}).
+		Then the contribution of the proposed particle to the total potential energy~$V$ is calculated.
+		
+	\item
+		At this point the target distribution of the canonical ensemble
+		\begin{align*}
+			P \propto \exp\left[ - \beta E \right]
+		\end{align*}
+		with the total energy of the system
+		\begin{align*}
+			E = \sum_{i < j} V_{ij}
+		\end{align*}
+		has to be considered.
+		To obtain the acceptance probability~$\alpha$ according to equation \eqref{eq:acceptance_probability} the ratio
+		\begin{align*}
+			\alpha = \frac{\exp\left[ -\beta E_\mathrm{prop.} \right]}{\exp \left[ -\beta E_\mathrm{cur.} \right]} = \exp\left[ -\beta \left( E_\mathrm{prop.} - E_\mathrm{cur.} \right) \right]
+		\end{align*}
+		is calculated.
+		Since only one particle was changed, the difference $E_\mathrm{prop.} - E_\mathrm{cur.}$ reduces to the difference in contributions to the potential energy of the proposed and the current particle state.
+		
+		Lastly a $\mathcal{U}(0, 1)$-distributed random variable is compared to the calculated acceptance probability.
+		If the variable is smaller than the acceptance probability the trial configuration is rejected, the old state is restored and the member function returns \texttt{false} indicating that the proposed state was rejected.
+		Otherwise the new proposed state is kept and \texttt{true} is returned.		
+\end{enumerate}
 
 
 \section{Temperature dependence} \label{Sec:Temperature}
@@ -231,7 +293,7 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 	\section{Source code}
 	The full source code can be found on \url{https://github.com/chrisieh/piap} (a \texttt{C++14} compliant compiler is needed).
 	\subsection{CanonicalEnsemble{.}h} \label{sec:canonical_ensemble_source}
-	\lstinputlisting[language=C++]{./data/CanonicalEnsemble.tex}
+	\lstinputlisting[language=C++]{../code/src/CanonicalEnsemble.h}
 \end{appendix}
 
 \end{document}
