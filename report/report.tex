@@ -124,7 +124,12 @@
 % ABSTRACT
 \begin{abstract}
 \noindent 
-We consider a set of two oppositely charged particles that interact via a two-particle potential in a finite volume in two dimensions. With a Random-Walk Metropolis algorithm we simulate the time evolution of this system. Our focus lies on the analysis of the temperature dependence in particular the average pair distance. Additionally we also study the behavior for different potentials and in three dimensions.
+We consider a set of two oppositely charged particles that interact via a two-particle potential in a finite volume in two dimensions.
+With a Random-Walk Metropolis algorithm we simulate the time evolution of this system.
+Our focus lies on the analysis of the temperature dependence in particular the average pair distance.
+Additionally we also study the behavior for different potentials and in three dimensions.
+
+\remark{Bitte kein "We", "our" etc.\ sondern passiv. Im Latex Text nach jedem Satz eine neue Zeile wegen git. Schreibstil vgl.\ section Background.}
 \end{abstract}
 
 \end{titlepage}
@@ -137,16 +142,22 @@ We consider a set of two oppositely charged particles that interact via a two-pa
 % CONTENT
 
 \section{Introduction}
-This paper summarizes our results of the analysis of a two-dimensional system where we only have two kind of particles, a positive and a negative one. They interact via a potential which is given by
+This report summarizes our results of the analysis of a two-dimensional system where we only have two kind of particles, a positive and a negative one.
+They interact via a potential which is given by
 \begin{equation}
-V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, .
+V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, \text{.}
 \end{equation}
-For the analysis we use a Random-Walk Metropolis algorithm which will be explained in chapter \ref{Sec:Metropolis}. The used algorithm depends on the temperature and we study this dependence in chapter \ref{Sec:Temperature}. As an indicator for the phase of the system we monitor the average pair distance. A visualization of the different phases was also done and can be found in the section \ref{Sec:Visualisation}. In addition to that we did some further research with other potentials (e.g. Lennard-Jones potential) and we simulated the system in three dimensions. These further thoughts and results are explained in chapter \ref{Sec:Further_Analysis}.
+For the analysis we use a Random-Walk Metropolis algorithm which will be explained in chapter \ref{sec:Metropolis}.
+The used algorithm depends on the temperature and we study this dependence in chapter \ref{sec:Temperature}.
+As an indicator for the phase of the system we monitor the average pair distance.
+A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
+In addition to that we did some further research with other potentials (e.g. Lennard-Jones potential) and we simulated the system in three dimensions.
+These further thoughts and results are explained in chapter \ref{sec:Further_Analysis}.
 
 
 \section{Background}
 
-\subsection{Canonical ensemble} \label{Sec:Canonical_Ensemble}
+\subsection{Canonical ensemble} \label{sec:Canonical_Ensemble}
 
 The statistical ensemble describing a fixed number of particles~$N$ in a given volume~$V$, which is in thermal equilibrium with a heat bath of temperature~$T$, is the canonical ensemble.
 Aim of this project is to sample states from a given ensemble with fixed $N, V, T$ and use these to calculate expectation values of certain observables.
@@ -168,7 +179,7 @@ Since the calculation of $Z$ is computationally expensive a sampling method with
 One such method is sampling using the Metropolis algorithm, which is introduced in the following section.
 
 
-\subsection{Metropolis algorithm} \label{Sec:Metropolis}
+\subsection{Metropolis algorithm} \label{sec:Metropolis}
 The Metropolis algorithm is a Markov-chain Monte-Carlo method for generating an autocorrelated sequence of random samples of a given probability distribution.
 These samples can be used to approximate distributions for which direct sampling methods cannot be employed. \remark{Hier mehr?}
 Hereafter a summary of the algorithm is given.\\
@@ -177,7 +188,7 @@ Hereafter a summary of the algorithm is given.\\
 For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random samples~$\left( x_n \right)$ can be obtained using the following steps:
 \begin{enumerate}
 	\item \textbf{Trial change:}
-		Propose a new state $y$ according to a symmetric proposal distribution $q(Y|x_n)$ dependent on the current state $x_n$.
+		Propose a new state $y$ according to a symmetric proposal distribution $q(Y|x_n)$ depending on the current state $x_n$.
 		
 	\item \textbf{Accept-reject step:}
 		Calculate the acceptance probability
@@ -238,7 +249,7 @@ In the following a detailed description of the implemented algorithm shall be gi
 		with the inter-particle potential $V_{ij}$ as specified in \texttt{potential\_func}.
 		
 	\item
-		The state of the selected particle is saved and a trial change of the current state is made using the proposal distribution as implemented in \texttt{proposal\_func} (further details in section \remark{REF}).
+		The state of the selected particle is saved and a trial change of the current state is made using the proposal distribution as implemented in \texttt{proposal\_func} (further details in section \ref{sec:proposal_function}).
 		Then the contribution of the proposed particle to the total potential energy~$V$ is calculated.
 		
 	\item
@@ -263,9 +274,20 @@ In the following a detailed description of the implemented algorithm shall be gi
 		Otherwise the new proposed state is kept and \texttt{true} is returned.		
 \end{enumerate}
 
+\subsection{Proposal function} \label{sec:proposal_function}
 
-\section{Temperature dependence} \label{Sec:Temperature}
 
+
+\section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
+Introduction: 2D \& 3D?
+
+\subsection{Potentials}
+\begin{itemize}
+	\item Coulomb with hard core
+	\item Lennard-Jones
+\end{itemize}
+
+\subsection{???}
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
@@ -273,8 +295,11 @@ In the following a detailed description of the implemented algorithm shall be gi
 \end{figure}
 
 
-\section{Visualization} \label{Sec:Visualisation}
-\section{Further Analysis} \label{Sec:Further_Analysis}
+\subsection{Visualization} \label{sec:Visualisation}
+3D Visualization?
+
+
+\section{Further Analysis} \label{sec:Further_Analysis}
 
 
 
