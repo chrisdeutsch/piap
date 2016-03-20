@@ -26,7 +26,7 @@ int main() {
 
     auto initial_state = random_state(side_length, particle_num);
     auto proposal_function =
-        make_proposal_function(proposal_stddev, side_length);
+        unif_proposal_function(proposal_stddev, side_length);
 
     // Simulate samples of the canonical ensemble using the Random-Walk
     // Metropolis-Algorithm

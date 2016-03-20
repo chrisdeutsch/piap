@@ -30,11 +30,19 @@ set(SOURCES_3D
 
 add_executable(coulomb3d ${SOURCES_3D})
 
+# Calculate observables
+set(SOURCES_3D_OBS
+    src/coulomb3d_obs.cpp
+    src/Particle.cpp
+    src/Common.cpp)
+
+add_executable(coulomb3d_obs ${SOURCES_3D_OBS})
 
 set(TARGETS
     coulomb2d
     coulomb2d_obs
-    coulomb3d)
+    coulomb3d
+    coulomb3d_obs)
 
 set_property(TARGET ${TARGETS} PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${TARGETS} PROPERTY CXX_STANDARD_REQUIRED ON)

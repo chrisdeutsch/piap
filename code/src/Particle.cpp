@@ -19,6 +19,24 @@ double coulomb_core(const Particle3D &a, const Particle3D &b) {
     return a.q * b.q / distance + std::pow(distance, -8.0);
 }
 
+double lennard_jones(const Particle2D &a, const Particle2D &b) {
+    const auto dx = a.x - b.x;
+    const auto dy = a.y - b.y;
+
+    const auto distance_sq = dx * dx + dy * dy;
+    return std::pow(distance_sq, -6.0) - std::pow(distance_sq, -3.0);
+}
+
+double lennard_jones(const Particle3D &a, const Particle3D &b) {
+    const auto dx = a.x - b.x;
+    const auto dy = a.y - b.y;
+    const auto dz = a.z - b.z;
+
+    const auto distance_sq = dx * dx + dy * dy + dz * dz;
+    return std::pow(distance_sq, -6.0) - std::pow(distance_sq, -3.0);
+}
+
+
 double avg_pair_dist(const CanonicalEnsemble<Particle2D>::State &state) {
     const auto N = state.size();
     double distance = 0.0;
