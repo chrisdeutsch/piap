@@ -275,11 +275,49 @@ In the following a detailed description of the implemented algorithm shall be gi
 \end{enumerate}
 
 \subsection{Proposal function} \label{sec:proposal_function}
+The proposal function contains an implementation of the proposal distribution, which occurs in the Metropolis algorithm.
+Its required arguments are a reference to a \texttt{ParticleState} representing the state of one particle, for which a new state according to the proposal distribution should be chosen.
+Moreover the function takes a reference to a random number generator, which is used to create random variables for sampling from the proposal distribution.
+
+For illustration purposes consider the one dimensional case of a particle with charge~$q$ and a coordinate~$x$ on a line.
+A proposal distribution
+\begin{align*}
+	q(y|x) = \begin{cases}
+		\frac{1}{2\Delta} \,, & y \in \left[x - \Delta, x + \Delta \right]\\
+		0 \,, & \text{else}
+	\end{cases}
+\end{align*}
+suggesting a new particle position uniformly on a line segment of length $2\Delta$ centered at the current particle position~$x$.
+This could be implemented as a proposal function in the following way:
+\begin{lstlisting}[language=C++]
+struct Particle1D {
+	double q;
+	double x;
+}
+
+Particle1D proposal_function_1d(const Particle1D &p, std::m19937 &rng) {
+	std::uniform_real_distribution<> unif_dist(-delta, delta);
+	
+	Particle1D ret;
+	ret.q = p.q;
+	ret.x = p.x + unif_dist(rng);
+	
+	return ret;
+}
+\end{lstlisting}
+(for this to be valid code the parameter \texttt{delta} must be set\footnote{For the implementation used in this report, proposal functions are realized as function objects with an associated member \texttt{delta}.}).
+This scheme is easily extended to charged/uncharged particles in two or three dimensions, using an uniform proposal in a box centered at the particle position.
+The simulated data used in this report was generated using such a proposal scheme.
+
+
+
+
 
 
 
 \section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
-Introduction: 2D \& 3D?
+Introduction: 2D \& 3D?\\
+TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).
 
 \subsection{Potentials}
 \begin{itemize}
@@ -291,7 +329,12 @@ Introduction: 2D \& 3D?
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
-	\caption{Temperature dependence}
+	\caption{Temperature dependence 2d case}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
+	\caption{Temperature dependence 3d case}
 \end{figure}
 
 
