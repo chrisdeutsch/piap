@@ -1,0 +1,89 @@
+\documentclass[mathserif,serif]{beamer}
+\usepackage[ngerman]{babel}
+%\usepackage[scale=0.75]{geometry}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subfigure} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[hang, center, nooneline]{caption}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage{color}															 
+\usepackage{colortbl}
+\usepackage{siunitx}
+\usepackage{fancybox}
+\usepackage{relsize}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{textpos}
+\usepackage{colortbl}
+
+\definecolor{TUeRed}{RGB}{170,0,0}
+\definecolor{TUeBlue}{RGB}{0,68,170}
+
+\addtobeamertemplate{frametitle}{}{% 
+\begin{textblock*}{100mm}(.95\textwidth,-1cm) \tikz {\fill[white] (0,0) -- %
+(2cm,0) -- (2cm,1.1cm) -- (0.5cm,1.1cm) -- cycle;\node[TUeBlue] at %
+(0.8cm,0.5cm) {\normalsize\insertframenumber};} \end{textblock*} }
+
+\setbeamercolor{frametitle}{bg=TUeBlue}
+\setbeamercolor{frametitle}{fg=white}
+
+  
+%EIGENE FOOTLINE (OHNE GESAMTSEITENZAHL) 
+%\setbeamertemplate{footline} 
+%{ 
+%\leavevmode% 
+%\hbox{% 
+%\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}% 
+%\usebeamerfont{author in head/foot}\insertshortauthor~~ 
+%\end{beamercolorbox}% 
+%\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}% 
+%\usebeamerfont{title in head/foot}\insertshorttitle 
+%\end{beamercolorbox}% 
+%\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}% 
+%\usebeamerfont{date in head/foot}\insertshortdate{}
+%\end{beamercolorbox}}% 
+%\vskip0pt% 
+%}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}\hspace*{-5mm}\insertshortauthor\hfill Particles in a Potential\hfill\insertdate}}
+
+\beamertemplatenavigationsymbolsempty
+
+\author{Christopher Deutsch and Philip Hauer}
+\title{Particles in a Potential}
+\date{30. March 2016}
+\subtitle{{\small Computational Physics}}
+
+\begin{document}
+\frame[plain]{\titlepage}
+\setcounter{framenumber}{0}
+\begin{frame}
+	\frametitle{Introduction - Particles in a Potential}
+		\begin{columns}
+		\column[c]{.50\textwidth}
+			\centering
+			Core of this project:
+			\begin{itemize}
+				\item positive and negative particles
+				\item interaction via potential
+				\item analysis with a Random-Walk Metropolis algorithm
+				\item study of temperature dependence
+				\item further thoughts (e.g. other potentials)
+			\end{itemize}
+		\column[c]{.50\textwidth}
+			
+	\end{columns}
+\end{frame}
+
+\end{document}

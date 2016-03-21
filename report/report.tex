@@ -124,12 +124,10 @@
 % ABSTRACT
 \begin{abstract}
 \noindent 
-We consider a set of two oppositely charged particles that interact via a two-particle potential in a finite volume in two dimensions.
-With a Random-Walk Metropolis algorithm we simulate the time evolution of this system.
-Our focus lies on the analysis of the temperature dependence in particular the average pair distance.
-Additionally we also study the behavior for different potentials and in three dimensions.
-
-\remark{Bitte kein "We", "our" etc.\ sondern passiv. Im Latex Text nach jedem Satz eine neue Zeile wegen git. Schreibstil vgl.\ section Background.}
+A set of two oppositely charged particles that interact via a two-particle potential in a finite volume in two dimensions is considered.
+With a Random-Walk Metropolis algorithm one can simulate the time evolution of this system.
+The focus of this report lies on the analysis of the temperature dependence in particular the average pair distance.
+Additionally the behavior for different potentials and in three dimensions is also studied.
 \end{abstract}
 
 \end{titlepage}
@@ -142,16 +140,16 @@ Additionally we also study the behavior for different potentials and in three di
 % CONTENT
 
 \section{Introduction}
-This report summarizes our results of the analysis of a two-dimensional system where we only have two kind of particles, a positive and a negative one.
+This report summarizes the results of the analysis of a two-dimensional system where only two kind of particles, a positive and a negative one are considered.
 They interact via a potential which is given by
 \begin{equation}
-V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, \text{.}
+V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, \text{.} \label{Eq:Potential}
 \end{equation}
-For the analysis we use a Random-Walk Metropolis algorithm which will be explained in chapter \ref{sec:Metropolis}.
-The used algorithm depends on the temperature and we study this dependence in chapter \ref{sec:Temperature}.
+For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in chapter \ref{sec:Metropolis}.
+The used algorithm depends on the temperature and this dependence is studied in chapter \ref{sec:Temperature}.
 As an indicator for the phase of the system we monitor the average pair distance.
 A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
-In addition to that we did some further research with other potentials (e.g. Lennard-Jones potential) and we simulated the system in three dimensions.
+In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behaviour of this system in three dimensions was also analysed.
 These further thoughts and results are explained in chapter \ref{sec:Further_Analysis}.
 
 
@@ -325,7 +323,7 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 	\item Lennard-Jones
 \end{itemize}
 
-\subsection{???}
+\subsection{???} \label{sec:Temp_Dep}
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
@@ -339,7 +337,57 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 
 
 \subsection{Visualization} \label{sec:Visualisation}
-3D Visualization?
+In this section a few examples of the resulting final states are shown.
+For each picture a simulation with one million steps was performed.
+The position of the particles in the last step were saved and a python script (using the library \texttt{matplotlib}) created an image.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Kristall_3_beta_500.pdf}
+\caption{Final state for $\beta = 500$. 
+One can clearly see that this low temperature leads to a crystal (solid state). 
+The average pair distance is very small and regularly.
+Only a few crystallographic defects appear.}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Kristall_4_beta_500.pdf}
+\caption{Final state again for $\beta = 500$. 
+The average pair distance is slightly larger and the lattice is not regularly.
+A lot of crystallographic defects appear.
+This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Fluid_1_beta_40.pdf}
+\caption{Final state for $\beta = 40$.
+A higher temperature leads to an amorphous state (fluid).
+The average pair distance is larger and the lattice is completely gone.
+One can observe some strings and some particles which form a pair.}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Gas_1_beta_10.pdf}
+\caption{Final state for $\beta = 10$.
+An even higher temperature leads to an gaseous state.
+The average pair distance is at its maximum since the particles are more or less randomly distributed over the whole box.
+Additionally the strings which were observed at the amorphous state are now shorter.
+Often two particles form a pair.}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Plasma_1_beta_2.pdf}
+\caption{Final state for $\beta = 2$.
+At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
+Sometimes two particles with the same charge are very close together.}
+\end{figure}
+\color{red}3D Visualization?\color{black}
 
 
 \section{Further Analysis} \label{sec:Further_Analysis}
