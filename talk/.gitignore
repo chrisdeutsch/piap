@@ -7,4 +7,5 @@
 .DS_store
 *.nav
 *.snm
+*.synctex
 *~
