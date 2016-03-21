@@ -212,7 +212,7 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 For the simulations of the canonical ensemble the programming language \texttt{C++} was used.
 In the following a summary of the core implementation details is given.
 
-\subsection{Metropolis algorithm}
+\subsection{Metropolis algorithm} \label{sec:Metropolis_alg}
 Since the subject of this project requires the simulation of particles in two or three dimensions and different inter-particle potentials, a generic approach of implementing the algorithmic core was chosen.
 The source code of the implementation is listed in appendix~\ref{sec:canonical_ensemble_source}.
 
@@ -314,6 +314,22 @@ The simulated data used in this report was generated using such a proposal schem
 
 
 \section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
+To analyse the temperature dependence of the canonical ensemble the settings of the simulation have to be fixed. 
+The starting point is a random distribution of 40 particles (20 with positive charge, 20 with negative charge) inside a two-dimensional box with side length 15.
+In the next step the temperature (or more precisely the thermodynamical~$\beta$) has to be set. 
+A physical reasonable range for $\beta$ was observed to be 1 to 500. 
+
+As explained in chapter \ref{sec:Metropolis} the acceptance of a new state depends on the temperature and the proposal function.
+The proposal function itself depends on a parameter \texttt{delta} as explained in section \ref{sec:proposal_function}.
+In order to achieve reasonable results a acceptance rate of \SI{30}{\percent} is desirable. \remark{Why??}
+Therefore one has to set the parameter \texttt{delta} for each individual $\beta$ to get the desired acceptance rate of \SI{30}{\percent}.
+
+If all the parameters are set the simulation can start.
+A total of one million steps are simulated.
+The average-pair distant is calculated while simulating the system.
+To save some computation time the average pair distant is only calculated every \remark{n-th} step.
+
+
 Introduction: 2D \& 3D?\\
 TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).
 
@@ -323,7 +339,8 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 	\item Lennard-Jones
 \end{itemize}
 
-\subsection{???} \label{sec:Temp_Dep}
+\subsection{Analysis of the Temperature Dependence} \label{sec:Temp_Dep}
+
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
@@ -337,7 +354,7 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 
 \begin{figure}
 	\centering
-	\includegraphics{./figures/temp_dep_lj.pdf}
+	\includegraphics{./figures/temp_dep_lennard_jones2d.pdf}
 	\caption{Temperature dependence 3d case}
 \end{figure}
 
@@ -392,7 +409,7 @@ Often two particles form a pair.}
 At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
 Sometimes two particles with the same charge are very close together.}
 \end{figure}
-\color{red}3D Visualization?\color{black}
+\remark{3D Visualization?}
 
 
 \section{Further Analysis} \label{sec:Further_Analysis}
