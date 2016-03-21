@@ -18,8 +18,8 @@ ax.set_xlim(-0.5 * 15, 0.5 * 15)
 ax.set_ylim(-0.5 * 15, 0.5 * 15)
 ax.set_aspect('equal')
 
-plt.ylabel('position~$y$', fontsize = 14)
-plt.xlabel('position~$x$', fontsize = 14)
+plt.ylabel('position~$y$')
+plt.xlabel('position~$x$')
 
 
 radius = 1.0
