@@ -1,0 +1,4 @@
+30% acceptance rate
+200.000 samples per chain
+step factor 1.04 from beta 0.1 to 100.0
+box size 12.0
