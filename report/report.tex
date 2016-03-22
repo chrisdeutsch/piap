@@ -365,9 +365,10 @@ The calculation of the average pair distance is only done every \remark{k-th} st
 The results do not differ.}.
 The results of the average pair distance calculation was summed up and at the end of the simulation and than divided by the number of average pair distance calculations (to obtain the mean value of the average pair distance).
 In order to estimate the uncertainty of the mean value of the average pair distance one simulates many times and analyses the distribution of the calculated values.
-
 If one plots the mean value of the average pair distance against the temperature one can study the temperature dependence of the system.
-You can see in figure \ref{Fig:Temp_dep_Cou2D} the behaviour for the two-dimensional case with a coulomb potential.
+
+\subsubsection{Two-dimensional case with Coulomb potential}
+You can see in figure \ref{Fig:Temp_dep_Cou2D} the behaviour for the two-dimensional case with a Coulomb potential.
 The red line is the mean value, the red area is the 1$\sigma$-range and in the grey area lie \SI{90}{\percent} of the calculated values.
 About 24000 simulations where each simulation consists of one million steps were done to obtain this diagram.
 Since it is useful to plot the \remark{$x$}-axis logarithmically it makes sense to make the step-size for $\beta$ exponentially.
@@ -422,17 +423,31 @@ If a crystal is in a state where it is not possible to form a regular grid (mayb
 Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair distance.
 \end{itemize}
 
+\subsubsection{Two-dimensional case with Lennard-Jones potential}
+If the Coulomb potential is exchanged with a Lennard-Jones potential \remark{Gleichung referenzieren} the dependence on $\beta$ changes.
+The plot in figure \ref{Fig:Temp_dep_LJ2D} is basically the same as the plot in figure \ref{Fig:Temp_dep_Cou2D} but the potential is now a Lennard-Jones potential.
+One can clearly see that the behaviour for low values of $\beta$ is the same as for the Coulomb potential.
+For higher values of $\beta$ the average pair distance drops.
+After the average pair distance reaches its smallest value it begins to rise again.
+The Lennard-Jones potential has only a short range.
+This short range is responsible for this behaviour since some crystal like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else.
+Some pictures of the final states can be found in chapter \ref{sec:Visualisation}.
+
+\begin{figure}
+	\centering
+	\includegraphics{./figures/temp_dep_lennard_jones2d.pdf}
+	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
+	\label{Fig:Temp_dep_LJ2D}
+\end{figure}
+
+\subsubsection{Three-dimensional case with Coulomb potential}
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
 	\caption{Temperature dependence 3d case}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics{./figures/temp_dep_lennard_jones2d.pdf}
-	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
-\end{figure}
+
 
 \subsection{Visualization} \label{sec:Visualisation}
 In this section a few examples of the resulting final states are shown.
