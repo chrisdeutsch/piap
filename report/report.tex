@@ -147,7 +147,7 @@ V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| 
 \end{equation}
 For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in chapter \ref{sec:Metropolis}.
 The used algorithm depends on the temperature and this dependence is studied in chapter \ref{sec:Temperature}.
-As an indicator for the phase of the system we monitor the average pair distance.
+As an indicator for the phase of the system the average pair distance is monitored.
 A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
 In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behaviour of this system in three dimensions was also analysed.
 These further thoughts and results are explained in chapter \ref{sec:Further_Analysis}.
@@ -261,9 +261,9 @@ In the following a detailed description of the implemented algorithm shall be gi
 		\end{align*}
 		has to be considered.
 		To obtain the acceptance probability~$\alpha$ according to equation \eqref{eq:acceptance_probability} the ratio
-		\begin{align*}
+		\begin{align} \label{Eq:Prob_New_State}
 			\alpha = \frac{\exp\left[ -\beta E_\mathrm{prop.} \right]}{\exp \left[ -\beta E_\mathrm{cur.} \right]} = \exp\left[ -\beta \left( E_\mathrm{prop.} - E_\mathrm{cur.} \right) \right]
-		\end{align*}
+		\end{align}
 		is calculated.
 		Since only one particle was changed, the difference $E_\mathrm{prop.} - E_\mathrm{cur.}$ reduces to the difference in contributions to the potential energy of the proposed and the current particle state.
 		
@@ -321,19 +321,21 @@ A physical reasonable range for $\beta$ was observed to be 1 to 500.
 
 As explained in chapter \ref{sec:Metropolis} the acceptance of a new state depends on the temperature and the proposal function.
 The proposal function itself depends on a parameter \texttt{delta} as explained in section \ref{sec:proposal_function}.
-In order to achieve reasonable results a acceptance rate of \SI{30}{\percent} is desirable. \remark{Why??}
+In order to achieve reasonable results an acceptance rate of \SI{30}{\percent} is desirable. \remark{Why??}
 Therefore one has to set the parameter \texttt{delta} for each individual $\beta$ to get the desired acceptance rate of \SI{30}{\percent}.
 
 If all the parameters are set the simulation can start.
 A total of one million steps are simulated.
-The average-pair distant is calculated while simulating the system.
-To save some computation time the average pair distant is only calculated every \remark{n-th} step.
+The average pair distance is calculated while simulating the system.
+To save some computation time the average pair distance is only calculated every \remark{n-th} step.
+Additionally the first \remark{k} steps are neglected since the system needs some steps to "burn-in".
+This treatment is necessary since the simulation should start in an equilibrium (or at least near an equilibrium-like state).
 
 
-Introduction: 2D \& 3D?\\
-TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).
+\remark{Introduction: 2D \& 3D?\\
+TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).}
 
-\subsection{Potentials}
+\subsection{Potentials} \label{sec:Potentials}
 \begin{figure}
 	\centering
 	\includegraphics{./figures/potential_coulomb.pdf}
@@ -352,12 +354,74 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 \end{itemize}
 
 \subsection{Analysis of the Temperature Dependence} \label{sec:Temp_Dep}
+To analyse the temperature dependence one can observe the average pair distance.
+For the calculation of the average pair distance the formula
+\begin{equation}
+\frac{2}{N \cdot (N - 1)} \sum_{i<j} |\vec{r}_i - \vec{r}_j |
+\end{equation}
+is used.
+$N$ is the number of particles (in the simulation is $N=40$) and $\vec{r}_i$, $\vec{r}_j$ are the positions of the $i$-th and $j$-th particle.
+The calculation of the average pair distance is only done every \remark{k-th} step in order to save some computation time\footnote{A comparison between the calculation at every step and at every \remark{k-th} step was done.
+The results do not differ.}.
+The results of the average pair distance calculation was summed up and at the end of the simulation and than divided by the number of average pair distance calculations (to obtain the mean value of the average pair distance).
+In order to estimate the uncertainty of the mean value of the average pair distance one simulates many times and analyses the distribution of the calculated values.
 
-\begin{figure}
+If one plots the mean value of the average pair distance against the temperature one can study the temperature dependence of the system.
+You can see in figure \ref{Fig:Temp_dep_Cou2D} the behaviour for the two-dimensional case with a coulomb potential.
+The red line is the mean value, the red area is the 1$\sigma$-range and in the grey area lie \SI{90}{\percent} of the calculated values.
+About 24000 simulations where each simulation consists of one million steps were done to obtain this diagram.
+Since it is useful to plot the \remark{$x$}-axis logarithmically it makes sense to make the step-size for $\beta$ exponentially.
+The starting point for $\beta$ is 1 and the next $\beta$ is always \SI{4}{\percent} larger than the one before.
+As an ending point a value of $\beta=500$ is reasonable.
+Therefore there are 159 different values for $\beta$ in this diagram.
+
+\begin{figure}[!h]
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
 	\caption{Temperature dependence 2d case}
+	\label{Fig:Temp_dep_Cou2D}
 \end{figure}
+
+The diagram can be split into three parts.
+In the following paragraphs those three parts will be analysed.
+For a better understanding one can take a look at the figures in chapter \ref{sec:Visualisation}.
+
+\begin{itemize}
+\item{\remark{Gaseous state} ($\beta \lesssim 10)$:}
+
+The average pair distance is high for high temperatures (high temperatures are equivalent to low $\beta$).
+One expects this behaviour since for high temperatures the system is in a gaseous state.
+The distance between two particles is maximal in a gaseous system.
+Also one can clearly see that the uncertainty is very small.
+The interpretation of this small uncertainty is that the gas uses the whole volume of the box.
+Therefore one averages always over the whole box which leads to a small uncertainty.
+
+\item{\remark{Liquid State} ($10 \lesssim \beta \lesssim 100)$:}
+
+For higher $\beta$ the average pair distance drops.
+This happens at $\beta \approx 10$.
+From this point on the system is in a liquid-like state.
+The particles are getting closer together which one can interpret as the formation of particle chains.
+This can be understand if one takes a closer look to equation \ref{Eq:Prob_New_State}.
+The probability that a new proposed state is accepted depends on $\beta$.
+With higher $\beta$ the factor $\alpha$ gets small if $E_\mathrm{prop.} > E_\mathrm{cur.}$ and it is not likely that a $\mathcal{U}(0, 1)$-distributed random variable is smaller than $\alpha$.
+But if the other case happens ($E_\mathrm{prop.} < E_\mathrm{cur.}$) the factor $\alpha$ is always larger than 1 and therefore the proposed state will be accepted.
+
+\item{\remark{Solid State} ($100 \lesssim \beta$):}
+
+The average pair distance for high $\beta$ is almost constant.
+One can interpret this as a solid state.
+If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in chapter \ref{sec:Potentials}). \remark{Hier noch mehr?!}
+The reason that the particles form a solid state with a small distance is comparable to the argumentation that was used to explain the liquid state.
+In the case of very high $\beta$ the factor $\alpha$ is very small even if the proposed energy $E_\mathrm{prop.}$ is just slightly larger than the current energy $E_\mathrm{cur.}$.
+Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
+
+In the diagram one can also observe a huge uncertainty for high $\beta$.
+The explanation for this behaviour is the formation of crystallographic defects.
+If a crystal is in a state where it is not possible to form a regular grid (maybe due to a missing charge, a rotation of some structures \dots) the crystal will have a large expansion.
+Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair distance.
+\end{itemize}
+
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
@@ -367,7 +431,7 @@ TODO: Acceptance probability, observables considered, explain settings of simula
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_lennard_jones2d.pdf}
-	\caption{Temperature dependence 3d case}
+	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
 \end{figure}
 
 \subsection{Visualization} \label{sec:Visualisation}
