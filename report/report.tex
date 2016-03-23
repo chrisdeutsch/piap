@@ -425,12 +425,12 @@ Since the formation of crystallographic defects is random it leads to an uncerta
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
 If the Coulomb potential is exchanged with a Lennard-Jones potential \remark{Gleichung referenzieren} the dependence on $\beta$ changes.
-The plot in figure \ref{Fig:Temp_dep_LJ2D} is basically the same as the plot in figure \ref{Fig:Temp_dep_Cou2D} but the potential is now a Lennard-Jones potential.
+The settings for the plot in figure \ref{Fig:Temp_dep_LJ2D} are basically the same as for the plot in figure \ref{Fig:Temp_dep_Cou2D} but the underlying potential is now a Lennard-Jones potential.
 One can clearly see that the behaviour for low values of $\beta$ is the same as for the Coulomb potential.
 For higher values of $\beta$ the average pair distance drops.
 After the average pair distance reaches its smallest value it begins to rise again.
-The Lennard-Jones potential has only a short range.
-This short range is responsible for this behaviour since some crystal-like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else.
+%The Lennard-Jones potential has only a short range.
+The short range of the Lennard-Jones potential is responsible for this behaviour since some crystal-like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else. \remark{Hier mehr?!}
 Some pictures of the final states can be found in chapter \ref{sec:Visualisation}.
 
 \begin{figure}
@@ -454,12 +454,14 @@ In this section a few examples of the resulting final states are shown.
 For each picture a simulation with one million steps was performed.
 The position of the particles in the last step were saved and a python script (using the library \texttt{matplotlib}) created an image.
 
+\subsubsection{Two-dimensional case with Coulomb potential}
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{figures/Kristall_3_beta_500.pdf}
 \caption{Final state for $\beta = 500$. 
 One can clearly see that this low temperature leads to a crystal (solid state). 
 The average pair distance is very small and regularly.
+Another aspect is the quadrangular form of the grid (which is different for the Lennard-Jones potential as shown in 
 Only a few crystallographic defects appear.}
 \end{figure}
 
@@ -500,9 +502,47 @@ Often two particles form a pair.}
 At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
 Sometimes two particles with the same charge are very close together.}
 \end{figure}
+
+
+\subsubsection{Two-dimensional case with Lennard-Jones potential}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Beta_100_LJ.pdf}
+\caption{Final state for $\beta = 100$.
+As described in chapter \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
+Another difference compared to the Coulomb potential is the attraction of particles with the same charge.
+The reason is that the Lennard-Jones potential does not depend on the charge.
+Additionally the form of the grid is triangular and not quadrangular as in the Coulomb case.
+}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Beta_10_LJ.pdf}
+\caption{Final state for $\beta = 10$.
+Compared with the final state for $\beta=100$ the crystal is now bigger but the structure is more irregular.
+Some particles seem to move freely inside the box.}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Beta_5_LJ.pdf}
+\caption{Final state for $\beta = 5$.
+This state looks like the state where $\beta = 40$ in the Coulomb case.
+Some particles pair together and form a chain.
+One difference is again the formation of same charged particle pairs.}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figures/Beta_1_LJ.pdf}
+\caption{Final state for $\beta = 1$.
+The comparison with the final state where $\beta = 2$ in the Coulomb case seems reasonable.
+In both cases are no regularly structures visible and the particles are evenly distributed over the whole box.
+This is again the reason for the small uncertainty of the average pair distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
+\end{figure}
 \remark{3D Visualization?}
-
-
 \section{Further Analysis} \label{sec:Further_Analysis}
 
 
