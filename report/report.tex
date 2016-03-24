@@ -149,7 +149,7 @@ For the analysis a Random-Walk Metropolis algorithm is used. It will be explaine
 The used algorithm depends on the temperature and this dependence is studied in chapter \ref{sec:Temperature}.
 As an indicator for the phase of the system the average pair distance is monitored.
 A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
-In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behaviour of this system in three dimensions was also analysed.
+In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behavior of this system in three dimensions was also analyzed.
 These further thoughts and results are explained in chapter \ref{sec:Further_Analysis}.
 
 
@@ -314,7 +314,7 @@ The simulated data used in this report was generated using such a proposal schem
 
 
 \section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
-To analyse the temperature dependence of the canonical ensemble the settings of the simulation have to be fixed. 
+To analyze the temperature dependence of the canonical ensemble the settings of the simulation have to be fixed. 
 The starting point is a random distribution of 40 particles (20 with positive charge, 20 with negative charge) inside a two-dimensional box with side length 15.
 In the next step the temperature (or more precisely the thermodynamical~$\beta$) has to be set. 
 A physical reasonable range for $\beta$ was observed to be 1 to 500. 
@@ -336,16 +336,28 @@ This treatment is necessary since the simulation should start in an equilibrium 
 TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).}
 
 \subsection{Potentials} \label{sec:Potentials}
-\begin{figure}
-	\centering
-	\includegraphics{./figures/potential_coulomb.pdf}
-	\caption{Coulomb potential}
-\end{figure}
+
+
+\begin{align*}
+	V_{ij} = \frac{q_i q_j}{| \mathbf{r}_i - \mathbf{r}_j |} + \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^8}
+\end{align*}
+
+\begin{align*}
+V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6}
+\end{align*}
 
 \begin{figure}
-	\centering
-	\includegraphics{./figures/potential_lennard_jones.pdf}
-	\caption{Lennard-Jones potential}
+	\begin{subfigure}{1.0\textwidth}
+		\centering
+		\includegraphics{./figures/potential_coulomb.pdf}
+		\subcaption{Coulomb potential with hard core}
+	\end{subfigure}
+	\begin{subfigure}{1.0\textwidth}
+		\centering
+		\includegraphics{./figures/potential_lennard_jones.pdf}
+		\subcaption{Lennard-Jones potential}
+	\end{subfigure}
+	\caption{Potentials considered}	
 \end{figure}
 
 \begin{itemize}
@@ -368,7 +380,7 @@ In order to estimate the uncertainty of the mean value of the average pair dista
 If one plots the mean value of the average pair distance against the temperature one can study the temperature dependence of the system.
 
 \subsubsection{Two-dimensional case with Coulomb potential}
-You can see in figure \ref{Fig:Temp_dep_Cou2D} the behaviour for the two-dimensional case with a Coulomb potential.
+You can see in figure \ref{Fig:Temp_dep_Cou2D} the behavior for the two-dimensional case with a Coulomb potential.
 The red line is the mean value, the red area is the 1$\sigma$-range and in the grey area lie \SI{90}{\percent} of the calculated values.
 About 24000 simulations where each simulation consists of one million steps were done to obtain this diagram.
 Since it is useful to plot the \remark{$x$}-axis logarithmically it makes sense to make the step-size for $\beta$ exponentially.
@@ -391,7 +403,7 @@ For a better understanding one can take a look at the figures in chapter \ref{se
 \item{\remark{Gaseous state} ($\beta \lesssim 10)$:}
 
 The average pair distance is high for high temperatures (high temperatures are equivalent to low $\beta$).
-One expects this behaviour since for high temperatures the system is in a gaseous state.
+One expects this behavior since for high temperatures the system is in a gaseous state.
 The distance between two particles is maximal in a gaseous system.
 Also one can clearly see that the uncertainty is very small.
 The interpretation of this small uncertainty is that the gas uses the whole volume of the box.
@@ -418,7 +430,7 @@ In the case of very high $\beta$ the factor $\alpha$ is very small even if the p
 Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
 
 In the diagram one can also observe a huge uncertainty for high $\beta$.
-The explanation for this behaviour is the formation of crystallographic defects.
+The explanation for this behavior is the formation of crystallographic defects.
 If a crystal is in a state where it is not possible to form a regular grid (maybe due to a missing charge, a rotation of some structures \dots) the crystal will have a large expansion.
 Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair distance.
 \end{itemize}
@@ -426,7 +438,7 @@ Since the formation of crystallographic defects is random it leads to an uncerta
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
 If the Coulomb potential is exchanged with a Lennard-Jones potential \remark{Gleichung referenzieren} the dependence on $\beta$ changes.
 The settings for the plot in figure \ref{Fig:Temp_dep_LJ2D} are basically the same as for the plot in figure \ref{Fig:Temp_dep_Cou2D} but the underlying potential is now a Lennard-Jones potential.
-One can clearly see that the behaviour for low values of $\beta$ is the same as for the Coulomb potential.
+One can clearly see that the behavior for low values of $\beta$ is the same as for the Coulomb potential.
 For higher values of $\beta$ the average pair distance drops.
 After the average pair distance reaches its smallest value it begins to rise again.
 %The Lennard-Jones potential has only a short range.
