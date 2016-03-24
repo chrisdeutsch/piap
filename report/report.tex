@@ -327,7 +327,7 @@ At first some important settings of the simulation, which vary depending on the 
 The initial state of the simulation is a random distribution of~$N$ charged or uncharged particles inside a two or three dimensional box with side length~$L$.
 Since a random initial state is unprobable according to the target distribution, a burn-in phase discarding the first 1000 samples of the Markov-Chain will be employed.
 
-For monitoring the phase transitions of the ensemble, the average pair-distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamical~$\beta$, which needs to be set beforehand.
+For monitoring the phase transitions of the ensemble, the average pair-distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamic~$\beta$, which needs to be set beforehand.
 As explained in section \ref{sec:Metropolis} the mean acceptance rate is critical for good performance of the algorithm, which strongly depends on the simulated temperature and the parameter~$\Delta$ of the proposal function.
 Initial testing of the algorithm showed that reasonable performance can be obtained with an acceptance rate of~\SI{30}{\percent}.
 Therefore the parameter~$\Delta$ of the proposal function has to be adapted depending on the considered temperature to achieve the desired acceptance rate.
@@ -416,7 +416,7 @@ For a better understanding one can take a look at the figures in section \ref{se
 		The average pair-distance is high for high temperatures or equivalently small $\beta$.
 		One expects this behavior, since for high temperatures the system is in a gaseous state and the particles are homogeneously distributed in the whole volume of the box.
 		Therefore the average pair-distance is maximum in a gaseous system.
-		Moreover one observes small uncertainties in this temperature range, because of the homogeneous distribution of the particles.
+		Moreover one observes small uncertainties in this temperature range because of the homogeneous distribution of the particles.
 	
 	\item[Liquid state $(10^1 \lesssim \beta \lesssim 10^2)$]
 		For higher $\beta$ the average pair-distance decreases.
