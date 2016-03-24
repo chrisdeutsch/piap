@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.2.2">
-<info created="D:20160324123958" modified="D:20160324125419"/>
+<info created="D:20160324123958" modified="D:20160324130117"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -255,10 +255,10 @@ h
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
 <path layer="alpha" stroke="black" fill="0.902" pen="1">
-224 760 m
-224 640 l
-384 640 l
-384 760 l
+232 744 m
+232 640 l
+376 640 l
+376 744 l
 h
 </path>
 <path matrix="1 0 0 1 0 16" stroke="black" fill="1" pen="1">
@@ -287,7 +287,6 @@ h
 <use matrix="1 0 0 1 5.28579 10.17" name="mark/disk(sx)" pos="296 704" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 5.14516 -3.1851" name="mark/disk(sx)" pos="280 712" size="normal" stroke="black"/>
 <use name="mark/disk(sx)" pos="344.534 664.201" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 -10.4268 -3.55299" transformations="translations" pos="266.486 758.589" stroke="black" type="minipage" width="95.975" height="14.997" depth="10.03" valign="top" size="12" style="center">heat bath
-temperature~$T$</text>
+<text matrix="1 0 0 1 -10.4268 -21.553" transformations="translations" pos="266.486 758.589" stroke="black" type="minipage" width="95.975" height="6.642" depth="1.66" valign="top" size="12" style="center">heat bath</text>
 </page>
 </ipe>
