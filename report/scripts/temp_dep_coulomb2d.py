@@ -50,7 +50,7 @@ plt.xscale('log')
 
 # Labeling
 plt.legend(loc="lower left")
-plt.xlabel(r"thermodynamic beta~$\beta$")
+plt.xlabel(r"thermodynamic~$\beta$")
 plt.ylabel(r"average pair-distance~$d$")
 plt.xlim(1.0, 490.0)
 
