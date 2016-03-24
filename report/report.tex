@@ -481,53 +481,54 @@ For each picture a simulation with one million steps was performed.
 The position of the particles in the last step were saved and a python script (using the library \texttt{matplotlib}) created an image.
 
 \subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_vis}
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Kristall_3_beta_500.pdf}
-\caption{Final state for $\beta = 500$. 
-One can clearly see that this low temperature leads to a crystal (solid state). 
-The average pair distance is very small and regularly.
-Another aspect is the quadrangular form of the grid (which is different for the Lennard-Jones potential as shown in 
-Only a few crystallographic defects appear.}
+
+\begin{figure}[p]
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Kristall_3_beta_500.pdf}
+		\subcaption{Final state for $\beta = 500$. 
+		One can clearly see that this low temperature leads to a crystal (solid state). 
+		The average pair distance is very small and regularly.
+		Another aspect is the quadrangular form of the grid (which is different for the Lennard-Jones potential as shown in 
+		Only a few crystallographic defects appear.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Kristall_4_beta_500.pdf}
+		\subcaption{Final state again for $\beta = 500$. 
+		The average pair distance is slightly larger and the lattice is not regularly.
+		A lot of crystallographic defects appear.
+		This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Fluid_1_beta_40.pdf}
+		\subcaption{Final state for $\beta = 40$.
+		A higher temperature leads to an amorphous state (fluid).
+		The average pair distance is larger and the lattice is completely gone.
+		One can observe some strings and some particles which form a pair.}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Gas_1_beta_10.pdf}
+		\subcaption{Final state for $\beta = 10$.
+		An even higher temperature leads to an gaseous state.
+		The average pair distance is at its maximum since the particles are more or less randomly 		distributed over the whole box.
+		Additionally the strings which were observed at the amorphous state are now shorter.
+		Often two particles form a pair.}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Plasma_1_beta_2.pdf}
+		\subcaption{Final state for $\beta = 2$.
+		At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
+		Sometimes two particles with the same charge are very close together.}
+	\end{subfigure}
+	\caption{Some pictures}	
 \end{figure}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Kristall_4_beta_500.pdf}
-\caption{Final state again for $\beta = 500$. 
-The average pair distance is slightly larger and the lattice is not regularly.
-A lot of crystallographic defects appear.
-This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
-\end{figure}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Fluid_1_beta_40.pdf}
-\caption{Final state for $\beta = 40$.
-A higher temperature leads to an amorphous state (fluid).
-The average pair distance is larger and the lattice is completely gone.
-One can observe some strings and some particles which form a pair.}
-\end{figure}
-
-
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Gas_1_beta_10.pdf}
-\caption{Final state for $\beta = 10$.
-An even higher temperature leads to an gaseous state.
-The average pair distance is at its maximum since the particles are more or less randomly distributed over the whole box.
-Additionally the strings which were observed at the amorphous state are now shorter.
-Often two particles form a pair.}
-\end{figure}
-
-
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Plasma_1_beta_2.pdf}
-\caption{Final state for $\beta = 2$.
-At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
-Sometimes two particles with the same charge are very close together.}
-\end{figure}
 
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
