@@ -413,36 +413,43 @@ Generally the diagram can be split into three distinct parts, which will be anal
 For a better understanding one can take a look at the figures in section \ref{sec:Visualisation}.
 \begin{description}
 	\item[Gaseous state $(\beta \lesssim 10^1)$] 
-		The average pair-distance is high for high temperatures (high temperatures are equivalent to low $\beta$).
-		One expects this behavior since for high temperatures the system is in a gaseous state.
-		The distance between two particles is maximal in a gaseous system.
-		Also one can clearly see that the uncertainty is very small.
-		The interpretation of this small uncertainty is that the gas uses the whole volume of the box.
-		Therefore one averages always over the whole box which leads to a small uncertainty.
+		The average pair-distance is high for high temperatures or equivalently small $\beta$.
+		One expects this behavior, since for high temperatures the system is in a gaseous state and the particles are homogeneously distributed in the whole volume of the box.
+		Therefore the average pair-distance is maximum in a gaseous system.
+		Moreover one observes small uncertainties in this temperature range, because of the homogeneous distribution of the particles.
 	
 	\item[Liquid state $(10^1 \lesssim \beta \lesssim 10^2)$]
-		For higher $\beta$ the average pair-distance drops.
-		This happens at $\beta \approx 10$.
-		From this point on the system is in a liquid-like state.
-		The particles are getting closer together which one can interpret as the formation of particle chains.
-		This can be understand if one takes a closer look to equation \ref{Eq:Prob_New_State}.
-		The probability that a new proposed state is accepted depends on $\beta$.
-		With higher $\beta$ the factor $\alpha$ gets small if $E_\mathrm{prop.} > E_\mathrm{cur.}$ and it is not likely that a $\mathcal{U}(0, 1)$-distributed random variable is smaller than $\alpha$.
-		But if the other case happens ($E_\mathrm{prop.} < E_\mathrm{cur.}$) the factor $\alpha$ is always larger than 1 and therefore the proposed state will be accepted.
-	
-	\item[Solid state  $(\beta \gtrsim 10^2)$]
-		The average pair-distance for high $\beta$ is almost constant.
-		One can interpret this as a solid state.
-		If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in section \ref{sec:Potentials}). \remark{Hier noch mehr?!}
-		The reason that the particles form a solid state with a small distance is comparable to the argumentation that was used to explain the liquid state.
-		In the case of very high $\beta$ the factor $\alpha$ is very small even if the proposed energy $E_\mathrm{prop.}$ is just slightly larger than the current energy $E_\mathrm{cur.}$.
-		Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
+		For higher $\beta$ the average pair-distance decreases.
+		This happens at $\beta \approx 10$ at which the system enters a liquid-like state.
+		The particles start to form chains, which lead to a reduction in the average pair-distance.
 		
-		In the diagram one can also observe a huge uncertainty for high $\beta$.
-		The explanation for this behavior is the formation of crystallographic defects.
-		If a crystal is in a state where it is not possible to form a regular grid (maybe due to a missing charge, a rotation of some structures \dots) the crystal will have a large expansion.
-		Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair-distance.
+		This can be understood if one takes a closer look to equation \ref{Eq:Prob_New_State}.
+		The probability that a new proposed state is accepted depends on the value of the thermodynamic~$\beta$.
+		With higher $\beta$ the acceptance probability~$\alpha$ gets smaller if a trial state with higher energy is proposed.
+		Therefore the Metropolis algorithm tends to minimize the total energy of the state for low temperatures.
+		
+		In the physical sense this leads to the formation of amorphous structures in a liquid-like state, which tend to reduce the total energy of the system at intermediate temperatures.		
+		
+	\item[Solid state $(\beta \gtrsim 10^2)$]
+		At extremely low temperatures the average pair-distance is almost constant and minimum.
+		This is interpreted as the particles forming a lattice and thus entering a solid state.
+		If a regular lattice is formed, the particles cannot get any closer for smaller temperatures, since the particles tend to coincide with the potential minimum as discussed in section \ref{sec:Potentials}.
+		
+		The reason (concerning the algorithm) that the particles form a solid state with a small average pair-distance is analogous to the argumentation for the liquid state.
+		
+		Finally one can observe a big uncertainty in figure \ref{Fig:Temp_dep_Cou2D} for the average pair-distance at high $\beta$.
+		This is a result of the formation of crystallographic defects in the lattice.
+		If the solid is in a state where it is not possible to form a compact grid (due to vacancies or appendices on the crystal), the resulting average pair-distance tends to increase.
+		Therefore the formation of crystallographic defects leads to a large uncertainty in the average pair-distance.
 \end{description}
+
+
+\subsubsection{Three-dimensional case with Coulomb potential}
+\begin{figure}
+	\centering
+	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
+	\caption{Temperature dependence 3d case}
+\end{figure}
 
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
@@ -462,11 +469,14 @@ Some pictures of the final states can be found in section \ref{sec:Visualisation
 	\label{Fig:Temp_dep_LJ2D}
 \end{figure}
 
-\subsubsection{Three-dimensional case with Coulomb potential}
+
+
+\subsubsection{Three-dimensional case with Lennard-Jones potential}
 \begin{figure}
 	\centering
-	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
-	\caption{Temperature dependence 3d case}
+	\includegraphics{./figures/temp_dep_lennard_jones3d.pdf}
+	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
+	\label{Fig:Temp_dep_LJ3D}
 \end{figure}
 
 
@@ -525,10 +535,9 @@ The position of the particles in the last step were saved and a python script (u
 	\caption{Some pictures}	
 \end{figure}
 
-
-
-
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
+
+
 
 \begin{figure}[!h]
 	\begin{subfigure}[t]{0.48\textwidth}
