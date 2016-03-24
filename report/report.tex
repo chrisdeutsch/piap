@@ -126,7 +126,7 @@
 \noindent 
 A set of two oppositely charged particles that interact via a two-particle potential in a finite volume in two dimensions is considered.
 With a Random-Walk Metropolis algorithm one can simulate the time evolution of this system.
-The focus of this report lies on the analysis of the temperature dependence in particular the average pair distance.
+The focus of this report lies on the analysis of the temperature dependence in particular the average pair-distance.
 Additionally the behavior for different potentials and in three dimensions is also studied.
 \end{abstract}
 
@@ -147,7 +147,7 @@ V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| 
 \end{equation}
 For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in section \ref{sec:Metropolis}.
 The used algorithm depends on the temperature and this dependence is studied in section \ref{sec:Temperature}.
-As an indicator for the phase of the system the average pair distance is monitored.
+As an indicator for the phase of the system the average pair-distance is monitored.
 A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
 In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behavior of this system in three dimensions was also analyzed.
 These further thoughts and results are explained in section \ref{sec:Further_Analysis}.
@@ -327,7 +327,7 @@ At first some important settings of the simulation, which vary depending on the 
 The initial state of the simulation is a random distribution of~$N$ charged or uncharged particles inside a two or three dimensional box with side length~$L$.
 Since a random initial state is unprobable according to the target distribution, a burn-in phase discarding the first 1000 samples of the Markov-Chain will be employed.
 
-For monitoring the phase transitions of the ensemble, the average pair distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamical~$\beta$, which needs to be set beforehand.
+For monitoring the phase transitions of the ensemble, the average pair-distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamical~$\beta$, which needs to be set beforehand.
 As explained in section \ref{sec:Metropolis} the mean acceptance rate is critical for good performance of the algorithm, which strongly depends on the simulated temperature and the parameter~$\Delta$ of the proposal function.
 Initial testing of the algorithm showed that reasonable performance can be obtained with an acceptance rate of~\SI{30}{\percent}.
 Therefore the parameter~$\Delta$ of the proposal function has to be adapted depending on the considered temperature to achieve the desired acceptance rate.
@@ -380,79 +380,77 @@ For computational simplicity all quantities are considered to be dimensionless a
 
 
 \subsection{Analysis of the temperature dependence} \label{sec:Temp_Dep}
-As already stated the temperature dependence of the canonical ensemble can be monitored using the average pair distance~$d$ which is given by
+As already stated the temperature dependence of the canonical ensemble can be monitored using the average pair-distance~$d$ which is given by
 \begin{align*}
 d = \frac{2}{N(N - 1)} \sum_{i<j} |\mathbf{r}_i - \mathbf{r}_j | \, \text{,}
 \end{align*}
 where $N$ is the number of particles and $\mathbf{r}_i$, $\mathbf{r}_j$ are the positions of the $i$-th and $j$-th particle.
-The calculation of the average pair distance is only done every 20th step of the Markov-Chain in order to save computation time\footnote{A comparison between the calculation of the observable at every and every 20th step was done and no significant difference in the calculated expectation value was observed.}.
-The expectation value of the average pair distance can then be determined and saved for later analysis.
-In order to estimate the uncertainty of the average pair distance, the standard deviation and 0.05/0.95-quantiles of the expectation values from several chains at the same temperature is used.
+The calculation of the average pair-distance is only done every 20th step of the Markov-Chain in order to save computation time\footnote{A comparison between the calculation of the observable at every and every 20th step was done and no significant difference in the calculated expectation value was observed.}.
+The expectation value of the average pair-distance can then be determined and saved for later analysis.
+In order to estimate the uncertainty of the average pair-distance, the standard deviation and 0.05/0.95-quantiles of the expectation values from several chains at the same temperature is used.
 
-In the following sections the average pair distance~$d$ was simulated for different thermodynamic~$\beta$ and is depicted in $d(\beta)$-graphs using bands to indicate the $1\sigma$-range and quantiles.
+In the following sections the average pair-distance~$d$ was simulated for different thermodynamic~$\beta$ and is depicted in $d(\beta)$-graphs using bands to indicate the $1\sigma$-range and quantiles.
 
-\subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_tempdep}
-You can see in figure \ref{Fig:Temp_dep_Cou2D} the behavior for the two-dimensional case with a Coulomb potential.
-The red line is the mean value, the red area is the 1$\sigma$-range and in the grey area lie \SI{90}{\percent} of the calculated values.
-About 24000 simulations where each simulation consists of one million steps were done to obtain this diagram.
-Since it is useful to plot the \remark{$x$}-axis logarithmically it makes sense to make the step-size for $\beta$ exponentially.
-The starting point for $\beta$ is 1 and the next $\beta$ is always \SI{4}{\percent} larger than the one before.
-As an ending point a value of $\beta=500$ is reasonable.
-Therefore there are 159 different values for $\beta$ in this diagram.
+\subsubsection{Coulomb potential with hard core in two dimensions} \label{sec:2d_coulomb_tempdep}
+For this case a total of 20 positively and 20 negatively charged particles were simulated in a two dimensional box with side length 15.0.
+The temperature range of this simulation was chosen to be $\beta \in [1, 500]$, which contains the relevant phase transitions of the ensemble.
+Since this range consists of multiple orders of magnitude, the temperature is best depicted using a logarithmic axis.
+Therefore the simulated thermodynamic~$\beta$ should increase exponentially to achieve equally spaced points on the logarithmic axis.
+Explicitly the simulation starts at $\beta = 1.0$ and increases by approximately \SI{4}{\percent} for each step, which results in a total of 160 simulated temperatures on the range considered.
+Moreover for every thermodynamic~$\beta$ a total of \num{4000} chains (with $10^6$ samples each) were generated.
 
-\begin{figure}[!h]
+The resulting average pair-distance plot is given in figure \ref{Fig:Temp_dep_Cou2D}, where the red line gives the mean value of the average pair-distance over all chains at a fixed temperature and analogously the red band the range of one standard deviation at either side of the mean.
+
+\begin{figure}[h]
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
-	\caption{Temperature dependence 2d case}
+	\caption{Temperature dependence of the average pair-distance for a Coulomb potential with hard cores in two dimensions.
+		A total of 20 positively and 20 negatively charged particles in a box with side length 15.0.}
 	\label{Fig:Temp_dep_Cou2D}
 \end{figure}
 
-The diagram can be split into three parts.
-In the following paragraphs those three parts will be analysed.
+Generally the diagram can be split into three distinct parts, which will be analyzed in the following paragraphs.
 For a better understanding one can take a look at the figures in section \ref{sec:Visualisation}.
+\begin{description}
+	\item[Gaseous state $(\beta \lesssim 10^1)$] 
+		The average pair-distance is high for high temperatures (high temperatures are equivalent to low $\beta$).
+		One expects this behavior since for high temperatures the system is in a gaseous state.
+		The distance between two particles is maximal in a gaseous system.
+		Also one can clearly see that the uncertainty is very small.
+		The interpretation of this small uncertainty is that the gas uses the whole volume of the box.
+		Therefore one averages always over the whole box which leads to a small uncertainty.
+	
+	\item[Liquid state $(10^1 \lesssim \beta \lesssim 10^2)$]
+		For higher $\beta$ the average pair-distance drops.
+		This happens at $\beta \approx 10$.
+		From this point on the system is in a liquid-like state.
+		The particles are getting closer together which one can interpret as the formation of particle chains.
+		This can be understand if one takes a closer look to equation \ref{Eq:Prob_New_State}.
+		The probability that a new proposed state is accepted depends on $\beta$.
+		With higher $\beta$ the factor $\alpha$ gets small if $E_\mathrm{prop.} > E_\mathrm{cur.}$ and it is not likely that a $\mathcal{U}(0, 1)$-distributed random variable is smaller than $\alpha$.
+		But if the other case happens ($E_\mathrm{prop.} < E_\mathrm{cur.}$) the factor $\alpha$ is always larger than 1 and therefore the proposed state will be accepted.
+	
+	\item[Solid state  $(\beta \gtrsim 10^2)$]
+		The average pair-distance for high $\beta$ is almost constant.
+		One can interpret this as a solid state.
+		If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in section \ref{sec:Potentials}). \remark{Hier noch mehr?!}
+		The reason that the particles form a solid state with a small distance is comparable to the argumentation that was used to explain the liquid state.
+		In the case of very high $\beta$ the factor $\alpha$ is very small even if the proposed energy $E_\mathrm{prop.}$ is just slightly larger than the current energy $E_\mathrm{cur.}$.
+		Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
+		
+		In the diagram one can also observe a huge uncertainty for high $\beta$.
+		The explanation for this behavior is the formation of crystallographic defects.
+		If a crystal is in a state where it is not possible to form a regular grid (maybe due to a missing charge, a rotation of some structures \dots) the crystal will have a large expansion.
+		Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair-distance.
+\end{description}
 
-\begin{itemize}
-\item{\remark{Gaseous state} ($\beta \lesssim 10)$:}
-
-The average pair distance is high for high temperatures (high temperatures are equivalent to low $\beta$).
-One expects this behavior since for high temperatures the system is in a gaseous state.
-The distance between two particles is maximal in a gaseous system.
-Also one can clearly see that the uncertainty is very small.
-The interpretation of this small uncertainty is that the gas uses the whole volume of the box.
-Therefore one averages always over the whole box which leads to a small uncertainty.
-
-\item{\remark{Liquid State} ($10 \lesssim \beta \lesssim 100)$:}
-
-For higher $\beta$ the average pair distance drops.
-This happens at $\beta \approx 10$.
-From this point on the system is in a liquid-like state.
-The particles are getting closer together which one can interpret as the formation of particle chains.
-This can be understand if one takes a closer look to equation \ref{Eq:Prob_New_State}.
-The probability that a new proposed state is accepted depends on $\beta$.
-With higher $\beta$ the factor $\alpha$ gets small if $E_\mathrm{prop.} > E_\mathrm{cur.}$ and it is not likely that a $\mathcal{U}(0, 1)$-distributed random variable is smaller than $\alpha$.
-But if the other case happens ($E_\mathrm{prop.} < E_\mathrm{cur.}$) the factor $\alpha$ is always larger than 1 and therefore the proposed state will be accepted.
-
-\item{\remark{Solid State} ($100 \lesssim \beta$):}
-
-The average pair distance for high $\beta$ is almost constant.
-One can interpret this as a solid state.
-If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in section \ref{sec:Potentials}). \remark{Hier noch mehr?!}
-The reason that the particles form a solid state with a small distance is comparable to the argumentation that was used to explain the liquid state.
-In the case of very high $\beta$ the factor $\alpha$ is very small even if the proposed energy $E_\mathrm{prop.}$ is just slightly larger than the current energy $E_\mathrm{cur.}$.
-Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
-
-In the diagram one can also observe a huge uncertainty for high $\beta$.
-The explanation for this behavior is the formation of crystallographic defects.
-If a crystal is in a state where it is not possible to form a regular grid (maybe due to a missing charge, a rotation of some structures \dots) the crystal will have a large expansion.
-Since the formation of crystallographic defects is random it leads to an uncertainty in the average pair distance.
-\end{itemize}
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
 If the Coulomb potential is exchanged with a Lennard-Jones potential \remark{Gleichung referenzieren} the dependence on $\beta$ changes.
 The settings for the plot in figure \ref{Fig:Temp_dep_LJ2D} are basically the same as for the plot in figure \ref{Fig:Temp_dep_Cou2D} but the underlying potential is now a Lennard-Jones potential.
 One can clearly see that the behavior for low values of $\beta$ is the same as for the Coulomb potential.
-For higher values of $\beta$ the average pair distance drops.
-After the average pair distance reaches its smallest value it begins to rise again.
+For higher values of $\beta$ the average pair-distance drops.
+After the average pair-distance reaches its smallest value it begins to rise again.
 %The Lennard-Jones potential has only a short range.
 The short range of the Lennard-Jones potential is responsible for this behaviour since some crystal-like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else. \remark{Hier mehr?!}
 Some pictures of the final states can be found in section \ref{sec:Visualisation}.
@@ -486,7 +484,7 @@ The position of the particles in the last step were saved and a python script (u
 		\includegraphics[width=\textwidth]{figures/Kristall_3_beta_500.pdf}
 		\subcaption{Final state for $\beta = 500$. 
 		One can clearly see that this low temperature leads to a crystal (solid state). 
-		The average pair distance is very small and regularly.
+		The average pair-distance is very small and regularly.
 		Another aspect is the quadrangular form of the grid (which is different for the Lennard-Jones potential as shown in 
 		Only a few crystallographic defects appear.}
 	\end{subfigure}
@@ -495,7 +493,7 @@ The position of the particles in the last step were saved and a python script (u
 		\centering
 		\includegraphics[width=\textwidth]{figures/Kristall_4_beta_500.pdf}
 		\subcaption{Final state again for $\beta = 500$. 
-		The average pair distance is slightly larger and the lattice is not regularly.
+		The average pair-distance is slightly larger and the lattice is not regularly.
 		A lot of crystallographic defects appear.
 		This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
 	\end{subfigure}
@@ -504,7 +502,7 @@ The position of the particles in the last step were saved and a python script (u
 		\includegraphics[width=\textwidth]{figures/Fluid_1_beta_40.pdf}
 		\subcaption{Final state for $\beta = 40$.
 		A higher temperature leads to an amorphous state (fluid).
-		The average pair distance is larger and the lattice is completely gone.
+		The average pair-distance is larger and the lattice is completely gone.
 		One can observe some strings and some particles which form a pair.}
 	\end{subfigure}
 	\hfill
@@ -513,7 +511,7 @@ The position of the particles in the last step were saved and a python script (u
 		\includegraphics[width=\textwidth]{figures/Gas_1_beta_10.pdf}
 		\subcaption{Final state for $\beta = 10$.
 		An even higher temperature leads to an gaseous state.
-		The average pair distance is at its maximum since the particles are more or less randomly 		distributed over the whole box.
+		The average pair-distance is at its maximum since the particles are more or less randomly 		distributed over the whole box.
 		Additionally the strings which were observed at the amorphous state are now shorter.
 		Often two particles form a pair.}
 	\end{subfigure}
@@ -565,7 +563,7 @@ The position of the particles in the last step were saved and a python script (u
 		\subcaption{Final state for $\beta = 1$.
 		The comparison with the final state where $\beta = 2$ in the Coulomb case seems reasonable.
 		In both cases are no regularly structures visible and the particles are evenly distributed over the whole box.
-		This is again the reason for the small uncertainty of the average pair distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
+		This is again the reason for the small uncertainty of the average pair-distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
 	\end{subfigure}
 
 \end{figure}

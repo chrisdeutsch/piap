@@ -43,7 +43,7 @@ plt.fill_between(result.index, std_lower, std_upper,
 plt.fill_between(result.index, std_upper, result.obs_95, facecolor='0.5',
                  alpha=0.25, linewidth=0.0)
 plt.fill_between(result.index, result.obs_5, std_lower, facecolor='0.5',
-                 alpha=0.25, label="$0.05 / 0.95$-Quantiles", linewidth=0.0)
+                 alpha=0.25, label="$0.05 / 0.95$-quantile", linewidth=0.0)
 
 # Logscale
 plt.xscale('log')
