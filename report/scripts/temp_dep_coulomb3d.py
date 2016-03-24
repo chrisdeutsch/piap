@@ -37,13 +37,13 @@ std_upper = result.obs.values + result.stddev.values
 
 plt.fill_between(result.index, std_lower, std_upper, 
                  facecolor=line_avg.get_color(), alpha=0.25,
-                 label="$1\sigma$-range")
+                 label="$1\sigma$-range", linewidth=0.0)
 
 # 90% confidence band
 plt.fill_between(result.index, std_upper, result.obs_95, facecolor='0.5',
-                 alpha=0.25)
+                 alpha=0.25, linewidth=0.0)
 plt.fill_between(result.index, result.obs_5, std_lower, facecolor='0.5',
-                 alpha=0.25, label="$0.05 / 0.95$-Quantiles")
+                 alpha=0.25, label="$0.05 / 0.95$-Quantiles", linewidth=0.0)
 
 # Logscale
 plt.xscale('log')

@@ -7,7 +7,7 @@ plt.style.use("publication")
 
 
 # Merge data
-data_files = glob.glob("data/lennard_jones2d/*.csv")
+data_files = glob.glob("data/lennard_jones3d/*.csv")
 data = []
 for file in data_files:
     data.append(pd.read_csv(file, comment="#"))
@@ -54,4 +54,4 @@ plt.xlabel(r"thermodynamic beta~$\beta$")
 plt.ylabel(r"average pair-distance~$d$")
 plt.xlim(0.1, 100.0)
 
-plt.savefig("figures/temp_dep_lennard_jones2d.pdf")
+plt.savefig("figures/temp_dep_lennard_jones3d.pdf")

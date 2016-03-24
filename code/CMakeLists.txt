@@ -57,13 +57,23 @@ set(SOURCES_LJ2D_OBS
 add_executable(lennard_jones2d_obs ${SOURCES_LJ2D_OBS})
 
 
+# Lennard-Jones in 3 dimensions
+set(SOURCES_LJ3D_OBS
+    src/lennard_jones3d_obs.cpp
+    src/Particle.cpp
+    src/Common.cpp)
+
+add_executable(lennard_jones3d_obs ${SOURCES_LJ3D_OBS})
+
+
 set(TARGETS
     coulomb2d
     coulomb2d_obs
     coulomb3d
     coulomb3d_obs
     lennard_jones2d
-    lennard_jones2d_obs)
+    lennard_jones2d_obs
+    lennard_jones3d_obs)
 
 set_property(TARGET ${TARGETS} PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${TARGETS} PROPERTY CXX_STANDARD_REQUIRED ON)
