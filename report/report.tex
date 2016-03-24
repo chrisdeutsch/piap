@@ -184,7 +184,7 @@ One such method is sampling using the Metropolis algorithm, which is introduced 
 
 \subsection{Metropolis algorithm} \label{sec:Metropolis}
 The Metropolis algorithm is a Markov-chain Monte-Carlo method for generating an autocorrelated sequence of random samples of a given probability distribution.
-These samples can be used to approximate distributions for which direct sampling methods cannot be employed. \remark{Hier mehr?}
+These samples can be used to approximate distributions for which direct sampling methods cannot be employed.
 Hereafter a summary of the algorithm is given.\\
 
 \noindent\textbf{Random-Walk Metropolis algorithm:}\\
@@ -212,6 +212,13 @@ For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random 
 Moreover the target density~$P(x)$ does not need to be normalized, since it only occurs as a fraction of densities in the accept-reject step.
 Therefore this algorithm is suitable to sample from a canonical ensemble without the explicit calculation of the canonical partition function.
 
+Finally one has to consider the influence of the proposal scheme on the behavior of the algorithm.
+A characteristic indicator of this is the mean acceptance rate in the accept-reject step.
+Generally, a small acceptance rate leads to slow mixing of the Markov-Chain, which means, that the state moves slowly through state-space.
+Conversely a high acceptance gives rise to rapid mixing of the chain and a thorough exploration of the state-space.
+In addition to this, the algorithm is less likely to get stuck at a local mode of the target distribution.
+In practice one has to balance both effects to achieve optimal performance of the algorithm.
+It is suggested \cite{gilks_richardson}, that a mean acceptance rate in the interval~$[0.15, 0.5]$ leads to good performance.
 
 \section{Implementation}
 For the simulations of the canonical ensemble the programming language \texttt{C++} was used.
@@ -336,9 +343,11 @@ To save some computation time the average pair distance is only calculated every
 Additionally the first \remark{k} steps are neglected since the system needs some steps to "burn-in".
 This treatment is necessary since the simulation should start in an equilibrium (or at least near an equilibrium-like state).
 
-
+\remark{Acceptance \cite{gilks_richardson} suggest 0.15 to 0.5}
 \remark{Introduction: 2D \& 3D?\\
 TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).}
+
+\remark{Units? $k_\mathrm{B} = 1$}
 
 \subsection{Potentials} \label{sec:Potentials}
 
@@ -563,15 +572,23 @@ This is again the reason for the small uncertainty of the average pair distance 
 \section{Further Analysis} \label{sec:Further_Analysis}
 
 
+\section{Conclusion}
+
+
 
 \FloatBarrier
 % BIBLIOGRAPHY
 \vspace{\fill}
 \begin{thebibliography}{9}
 \bibitem{schwabl}
-	F. Schwabl,
+	F.\ Schwabl,
 	\emph{Statistische Mechanik},
-	Springer, Berlin, 3rd edition 2006.
+	Springer, 3rd edition 2006.
+
+\bibitem{gilks_richardson}
+	W.\ R.\ Gilks, S.\ Richardson, D.\ J.\ Spiegelhalter,
+	\emph{Markov Chain Monte Carlo in Practice},
+	Chapman and Hall/CRC, 1st edition 1995.
 \end{thebibliography}
 
 \begin{appendix}
