@@ -379,19 +379,17 @@ For computational simplicity all quantities are considered to be dimensionless a
 \end{figure}
 
 
-\subsection{Analysis of the Temperature Dependence} \label{sec:Temp_Dep}
-To analyze the temperature dependence one can observe the average pair distance.
-For the calculation of the average pair distance the formula
+\subsection{Analysis of the temperature dependence} \label{sec:Temp_Dep}
+As already stated the temperature dependence of the canonical ensemble can be monitored using the average pair distance~$d$ which is given by
 \begin{align*}
-\frac{2}{N(N - 1)} \sum_{i<j} |\vec{r}_i - \vec{r}_j |
+d = \frac{2}{N(N - 1)} \sum_{i<j} |\mathbf{r}_i - \mathbf{r}_j | \, \text{,}
 \end{align*}
-is used.
-$N$ is the number of particles (in the simulation is $N=40$) and $\vec{r}_i$, $\vec{r}_j$ are the positions of the $i$-th and $j$-th particle.
-The calculation of the average pair distance is only done every \remark{k-th} step in order to save some computation time\footnote{A comparison between the calculation at every step and at every \remark{k-th} step was done.
-The results do not differ.}.
-The results of the average pair distance calculation was summed up and at the end of the simulation and than divided by the number of average pair distance calculations (to obtain the mean value of the average pair distance).
-In order to estimate the uncertainty of the mean value of the average pair distance one simulates many times and analyses the distribution of the calculated values.
-If one plots the mean value of the average pair distance against the temperature one can study the temperature dependence of the system.
+where $N$ is the number of particles and $\mathbf{r}_i$, $\mathbf{r}_j$ are the positions of the $i$-th and $j$-th particle.
+The calculation of the average pair distance is only done every 20th step of the Markov-Chain in order to save computation time\footnote{A comparison between the calculation of the observable at every and every 20th step was done and no significant difference in the calculated expectation value was observed.}.
+The expectation value of the average pair distance can then be determined and saved for later analysis.
+In order to estimate the uncertainty of the average pair distance, the standard deviation and 0.05/0.95-quantiles of the expectation values from several chains at the same temperature is used.
+
+In the following sections the average pair distance~$d$ was simulated for different thermodynamic~$\beta$ and is depicted in $d(\beta)$-Graphs using bands to indicate the $1\sigma$-range and 0.05/0.95-quantiles.
 
 \subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_tempdep}
 You can see in figure \ref{Fig:Temp_dep_Cou2D} the behavior for the two-dimensional case with a Coulomb potential.
