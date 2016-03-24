@@ -481,7 +481,7 @@ The position of the particles in the last step were saved and a python script (u
 \subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_vis}
 
 \begin{figure}[p]
-	\begin{subfigure}[t]{0.49\textwidth}
+	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Kristall_3_beta_500.pdf}
 		\subcaption{Final state for $\beta = 500$. 
@@ -491,7 +491,7 @@ The position of the particles in the last step were saved and a python script (u
 		Only a few crystallographic defects appear.}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[t]{0.49\textwidth}
+	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Kristall_4_beta_500.pdf}
 		\subcaption{Final state again for $\beta = 500$. 
@@ -499,7 +499,7 @@ The position of the particles in the last step were saved and a python script (u
 		A lot of crystallographic defects appear.
 		This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.49\textwidth}
+	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Fluid_1_beta_40.pdf}
 		\subcaption{Final state for $\beta = 40$.
@@ -507,7 +507,8 @@ The position of the particles in the last step were saved and a python script (u
 		The average pair distance is larger and the lattice is completely gone.
 		One can observe some strings and some particles which form a pair.}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.49\textwidth}
+	\hfill
+	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Gas_1_beta_10.pdf}
 		\subcaption{Final state for $\beta = 10$.
@@ -516,7 +517,7 @@ The position of the particles in the last step were saved and a python script (u
 		Additionally the strings which were observed at the amorphous state are now shorter.
 		Often two particles form a pair.}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.49\textwidth}
+	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Plasma_1_beta_2.pdf}
 		\subcaption{Final state for $\beta = 2$.
@@ -532,41 +533,44 @@ The position of the particles in the last step were saved and a python script (u
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
 
 \begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Beta_100_LJ.pdf}
-\caption{Final state for $\beta = 100$.
-As described in section \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
-Another difference compared to the Coulomb potential is the attraction of particles with the same charge.
-The reason is that the Lennard-Jones potential does not depend on the charge.
-Additionally the form of the grid is triangular and not quadrangular as in the Coulomb case.
-}
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Beta_100_LJ.pdf}
+		\subcaption{Final state for $\beta = 100$.
+		As described in section \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
+		Another difference compared to the Coulomb potential is the attraction of particles with the same charge.
+		The reason is that the Lennard-Jones potential does not depend on the charge.
+		Additionally the form of the grid is triangular and not quadrangular as in the Coulomb case.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Beta_10_LJ.pdf}
+		\subcaption{Final state for $\beta = 10$.
+		Compared with the final state for $\beta=100$ the crystal is now bigger but the structure is more irregular.
+		Some particles seem to move freely inside the box.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Beta_5_LJ.pdf}
+		\subcaption{Final state for $\beta = 5$.
+		This state looks like the state where $\beta = 40$ in the Coulomb case.
+		Some particles pair together and form a chain.
+		One difference is again the formation of same charged particle pairs.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/Beta_1_LJ.pdf}
+		\subcaption{Final state for $\beta = 1$.
+		The comparison with the final state where $\beta = 2$ in the Coulomb case seems reasonable.
+		In both cases are no regularly structures visible and the particles are evenly distributed over the whole box.
+		This is again the reason for the small uncertainty of the average pair distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
+	\end{subfigure}
+
 \end{figure}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Beta_10_LJ.pdf}
-\caption{Final state for $\beta = 10$.
-Compared with the final state for $\beta=100$ the crystal is now bigger but the structure is more irregular.
-Some particles seem to move freely inside the box.}
-\end{figure}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Beta_5_LJ.pdf}
-\caption{Final state for $\beta = 5$.
-This state looks like the state where $\beta = 40$ in the Coulomb case.
-Some particles pair together and form a chain.
-One difference is again the formation of same charged particle pairs.}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=1]{figures/Beta_1_LJ.pdf}
-\caption{Final state for $\beta = 1$.
-The comparison with the final state where $\beta = 2$ in the Coulomb case seems reasonable.
-In both cases are no regularly structures visible and the particles are evenly distributed over the whole box.
-This is again the reason for the small uncertainty of the average pair distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
-\end{figure}
 \remark{3D Visualization?}
 \section{Further Analysis} \label{sec:Further_Analysis}
 
