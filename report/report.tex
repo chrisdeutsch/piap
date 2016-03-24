@@ -220,7 +220,7 @@ In addition to this, the algorithm is less likely to get stuck at a local mode o
 In practice one has to balance both effects to achieve optimal performance of the algorithm.
 It is suggested \cite{gilks_richardson}, that a mean acceptance rate in the interval~$[0.15, 0.5]$ leads to good performance.
 
-\section{Implementation}
+\section{Implementation} \label{sec:implementation}
 For the simulations of the canonical ensemble the programming language \texttt{C++} was used.
 In the following a summary of the core implementation details is given.
 
@@ -321,37 +321,24 @@ The simulated data used in this report was generated using such a proposal schem
 
 
 \section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
+To analyze the temperature dependence of the canonical ensemble using different inter-particle potentials, which will be introduced in section \ref{sec:Potentials}, the implementation as described in section~\ref{sec:implementation} is used.
+At first some important settings of the simulation, which vary depending on the case considered, shall be introduced.
 
+The initial state of the simulation is a random distribution of~$N$ charged or uncharged particles inside a two or three dimensional box with side length~$L$.
+Since a random initial state is unprobable according to the target distribution, a burn-in phase discarding the first 1000 samples of the Markov-Chain will be employed.
 
+For monitoring the phase transitions of the ensemble, the average pair distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamical~$\beta$, which needs to be set beforehand.
+As explained in section \ref{sec:Metropolis} the mean acceptance rate is critical for good performance of the algorithm, which strongly depends on the simulated temperature and the parameter~$\Delta$ of the proposal function.
+Initial testing of the algorithm showed that reasonable performance can be obtained with an acceptance rate of~\SI{30}{\percent}.
+Therefore the parameter~$\Delta$ of the proposal function has to be adapted depending on the considered temperature to achieve the desired acceptance rate.
 
-
-
-To analyze the temperature dependence of the canonical ensemble the settings of the simulation have to be fixed. 
-The starting point is a random distribution of 40 particles (20 with positive charge, 20 with negative charge) inside a two-dimensional box with side length 15.
-In the next step the temperature (or more precisely the thermodynamical~$\beta$) has to be set. 
-A physical reasonable range for $\beta$ was observed to be 1 to 500. 
-
-As explained in section \ref{sec:Metropolis} the acceptance of a new state depends on the temperature and the proposal function.
-The proposal function itself depends on a parameter \texttt{delta} as explained in section \ref{sec:proposal_function}.
-In order to achieve reasonable results an acceptance rate of \SI{30}{\percent} is desirable. \remark{Why??}
-Therefore one has to set the parameter \texttt{delta} for each individual $\beta$ to get the desired acceptance rate of \SI{30}{\percent}.
-
-If all the parameters are set the simulation can start.
-A total of one million steps are simulated.
-The average pair distance is calculated while simulating the system.
-To save some computation time the average pair distance is only calculated every \remark{n-th} step.
-Additionally the first \remark{k} steps are neglected since the system needs some steps to "burn-in".
-This treatment is necessary since the simulation should start in an equilibrium (or at least near an equilibrium-like state).
-
-
-\remark{Introduction: 2D \& 3D?\\
-TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).}
-
-\remark{Units? $k_\mathrm{B} = 1$}
+Despite carefully setting the acceptance rate, the Random-Walk Metropolis algorithm often gets stuck at local modes of the target probability density.
+Therefore an approach of simulating a number of shorter chains was chosen.
+The chosen parameters of the simulation will be stated in the corresponding sections.
 
 \subsection{Potentials} \label{sec:Potentials}
 In the following a short introduction of the inter-particle potentials used in the simulation of the canonical ensemble is given.
-\remark{Units?}
+For computational simplicity all quantities are considered to be dimensionless and charges are assumed to be $\pm 1$.
 
 \begin{description}
 	\item[Coulomb potential with hard core:]
@@ -373,13 +360,9 @@ In the following a short introduction of the inter-particle potentials used in t
 		\end{align*}
 		This is depicted in figure \ref{fig:lennard_jones} and is similar to the Coulomb potential of oppositley charged particles.
 		However the Lennard-Jones potential is extremely short ranged due to its $r^{-6}$-dependence as compared to the $r^{-1}$-dependence of the Coulomb potential.
-	
 \end{description}
 
-
-
-
-\begin{figure}
+\begin{figure}[p]
 	\begin{subfigure}{1.0\textwidth}
 		\centering
 		\includegraphics{./figures/potential_coulomb.pdf}
@@ -397,11 +380,11 @@ In the following a short introduction of the inter-particle potentials used in t
 
 
 \subsection{Analysis of the Temperature Dependence} \label{sec:Temp_Dep}
-To analyse the temperature dependence one can observe the average pair distance.
+To analyze the temperature dependence one can observe the average pair distance.
 For the calculation of the average pair distance the formula
-\begin{equation}
-\frac{2}{N \cdot (N - 1)} \sum_{i<j} |\vec{r}_i - \vec{r}_j |
-\end{equation}
+\begin{align*}
+\frac{2}{N(N - 1)} \sum_{i<j} |\vec{r}_i - \vec{r}_j |
+\end{align*}
 is used.
 $N$ is the number of particles (in the simulation is $N=40$) and $\vec{r}_i$, $\vec{r}_j$ are the positions of the $i$-th and $j$-th particle.
 The calculation of the average pair distance is only done every \remark{k-th} step in order to save some computation time\footnote{A comparison between the calculation at every step and at every \remark{k-th} step was done.
