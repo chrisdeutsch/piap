@@ -29,14 +29,13 @@ r = np.linspace(0.2, 3.0, 1000)
 
 pot = 1.0 / r**12 - 1.0 / r**6
 
-plt.plot(r, pot, label="Lennard-Jones")
+plt.plot(r, pot)
 
 plt.grid()
 plt.xlim(0.5, 2.5)
-plt.ylim(-0.5, 3.0)
+plt.ylim(-0.4, 1.0)
 plt.xlabel("distance~$r$")
 plt.ylabel("potential~$V$")
-plt.legend(loc="upper right")
 
 plt.savefig("figures/potential_lennard_jones.pdf")
 plt.close()

@@ -145,12 +145,12 @@ They interact via a potential which is given by
 \begin{equation}
 V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, \text{.} \label{Eq:Potential}
 \end{equation}
-For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in chapter \ref{sec:Metropolis}.
-The used algorithm depends on the temperature and this dependence is studied in chapter \ref{sec:Temperature}.
+For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in section \ref{sec:Metropolis}.
+The used algorithm depends on the temperature and this dependence is studied in section \ref{sec:Temperature}.
 As an indicator for the phase of the system the average pair distance is monitored.
 A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
 In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behavior of this system in three dimensions was also analyzed.
-These further thoughts and results are explained in chapter \ref{sec:Further_Analysis}.
+These further thoughts and results are explained in section \ref{sec:Further_Analysis}.
 
 
 \section{Background}
@@ -320,18 +320,18 @@ This scheme is easily extended to charged/uncharged particles in two or three di
 The simulated data used in this report was generated using such a proposal scheme.
 
 
-
-
-
-
-
 \section{Temperature dependence of the canonical ensemble} \label{sec:Temperature}
+
+
+
+
+
 To analyze the temperature dependence of the canonical ensemble the settings of the simulation have to be fixed. 
 The starting point is a random distribution of 40 particles (20 with positive charge, 20 with negative charge) inside a two-dimensional box with side length 15.
 In the next step the temperature (or more precisely the thermodynamical~$\beta$) has to be set. 
 A physical reasonable range for $\beta$ was observed to be 1 to 500. 
 
-As explained in chapter \ref{sec:Metropolis} the acceptance of a new state depends on the temperature and the proposal function.
+As explained in section \ref{sec:Metropolis} the acceptance of a new state depends on the temperature and the proposal function.
 The proposal function itself depends on a parameter \texttt{delta} as explained in section \ref{sec:proposal_function}.
 In order to achieve reasonable results an acceptance rate of \SI{30}{\percent} is desirable. \remark{Why??}
 Therefore one has to set the parameter \texttt{delta} for each individual $\beta$ to get the desired acceptance rate of \SI{30}{\percent}.
@@ -343,41 +343,58 @@ To save some computation time the average pair distance is only calculated every
 Additionally the first \remark{k} steps are neglected since the system needs some steps to "burn-in".
 This treatment is necessary since the simulation should start in an equilibrium (or at least near an equilibrium-like state).
 
-\remark{Acceptance \cite{gilks_richardson} suggest 0.15 to 0.5}
+
 \remark{Introduction: 2D \& 3D?\\
 TODO: Acceptance probability, observables considered, explain settings of simulation, burn-in, only every n-th MC-Step observables are calculated (reason).}
 
 \remark{Units? $k_\mathrm{B} = 1$}
 
 \subsection{Potentials} \label{sec:Potentials}
+In the following a short introduction of the inter-particle potentials used in the simulation of the canonical ensemble is given.
+\remark{Units?}
+
+\begin{description}
+	\item[Coulomb potential with hard core:]
+		The Coulomb potential of two charged particles $V_\mathrm{Coulomb} \propto r^{-1}$ and a short ranged force $V_\mathrm{core} \propto r^{-8}$ parameterizing the particle's hard core  is given as
+		\begin{align*}
+			V_{ij} = \frac{q_i q_j}{| \mathbf{r}_i - \mathbf{r}_j |} + \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^8}
+		\end{align*}
+		with particle charges~$q$ and position vectors~$\mathbf{r}$.
+		At intermediate ranges this force is attractive for oppositley charged particles and repulsive for particles of the same charge.
+		The general behavior of this potential is depicted in figure \ref{fig:coulomb_core} and the hard core of the potential is visible as the steep ascend of the potential energy at a distance of $r \approx 1$.
+		Moreover a prominent minimum of the potential for oppositley charged particles can be observed at $r \approx 1.35$.
+		This is approximately the lattice spacing of crystals formed at low temperatures, as can be seen in section \ref{sec:2d_coulomb_vis}.
+		
+	\item[Lennard-Jones potential:]
+		The Lennard-Jones potential describes the inter-atomic potential between a pair of neutral atoms interacting via attractive Van der Waals forces $V_\mathrm{VdW} \propto r^{-6}$ and a repulsive contribution due to the Pauli exclusion principle $V_\mathrm{Pauli} \propto r^{-12}$.
+		Without loss of generality one can assume the functional form
+		\begin{align*}
+			V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6} \, \text{.}
+		\end{align*}
+		This is depicted in figure \ref{fig:lennard_jones} and is similar to the Coulomb potential of oppositley charged particles.
+		However the Lennard-Jones potential is extremely short ranged due to its $r^{-6}$-dependence as compared to the $r^{-1}$-dependence of the Coulomb potential.
+	
+\end{description}
 
 
-\begin{align*}
-	V_{ij} = \frac{q_i q_j}{| \mathbf{r}_i - \mathbf{r}_j |} + \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^8}
-\end{align*}
 
-\begin{align*}
-V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6}
-\end{align*}
 
 \begin{figure}
 	\begin{subfigure}{1.0\textwidth}
 		\centering
 		\includegraphics{./figures/potential_coulomb.pdf}
 		\subcaption{Coulomb potential with hard core}
+		\label{fig:coulomb_core}
 	\end{subfigure}
 	\begin{subfigure}{1.0\textwidth}
 		\centering
 		\includegraphics{./figures/potential_lennard_jones.pdf}
 		\subcaption{Lennard-Jones potential}
+		\label{fig:lennard_jones}
 	\end{subfigure}
 	\caption{Potentials considered}	
 \end{figure}
 
-\begin{itemize}
-	\item Coulomb with hard core
-	\item Lennard-Jones
-\end{itemize}
 
 \subsection{Analysis of the Temperature Dependence} \label{sec:Temp_Dep}
 To analyse the temperature dependence one can observe the average pair distance.
@@ -393,7 +410,7 @@ The results of the average pair distance calculation was summed up and at the en
 In order to estimate the uncertainty of the mean value of the average pair distance one simulates many times and analyses the distribution of the calculated values.
 If one plots the mean value of the average pair distance against the temperature one can study the temperature dependence of the system.
 
-\subsubsection{Two-dimensional case with Coulomb potential}
+\subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_tempdep}
 You can see in figure \ref{Fig:Temp_dep_Cou2D} the behavior for the two-dimensional case with a Coulomb potential.
 The red line is the mean value, the red area is the 1$\sigma$-range and in the grey area lie \SI{90}{\percent} of the calculated values.
 About 24000 simulations where each simulation consists of one million steps were done to obtain this diagram.
@@ -411,7 +428,7 @@ Therefore there are 159 different values for $\beta$ in this diagram.
 
 The diagram can be split into three parts.
 In the following paragraphs those three parts will be analysed.
-For a better understanding one can take a look at the figures in chapter \ref{sec:Visualisation}.
+For a better understanding one can take a look at the figures in section \ref{sec:Visualisation}.
 
 \begin{itemize}
 \item{\remark{Gaseous state} ($\beta \lesssim 10)$:}
@@ -438,7 +455,7 @@ But if the other case happens ($E_\mathrm{prop.} < E_\mathrm{cur.}$) the factor 
 
 The average pair distance for high $\beta$ is almost constant.
 One can interpret this as a solid state.
-If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in chapter \ref{sec:Potentials}). \remark{Hier noch mehr?!}
+If the particles form a solid state the particles can not come closer for smaller temperatures since the potential has a minimum (as discussed in section \ref{sec:Potentials}). \remark{Hier noch mehr?!}
 The reason that the particles form a solid state with a small distance is comparable to the argumentation that was used to explain the liquid state.
 In the case of very high $\beta$ the factor $\alpha$ is very small even if the proposed energy $E_\mathrm{prop.}$ is just slightly larger than the current energy $E_\mathrm{cur.}$.
 Therefore it is very unlikely that a state forms where the proposed energy is higher than the current energy.
@@ -457,7 +474,7 @@ For higher values of $\beta$ the average pair distance drops.
 After the average pair distance reaches its smallest value it begins to rise again.
 %The Lennard-Jones potential has only a short range.
 The short range of the Lennard-Jones potential is responsible for this behaviour since some crystal-like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else. \remark{Hier mehr?!}
-Some pictures of the final states can be found in chapter \ref{sec:Visualisation}.
+Some pictures of the final states can be found in section \ref{sec:Visualisation}.
 
 \begin{figure}
 	\centering
@@ -480,7 +497,7 @@ In this section a few examples of the resulting final states are shown.
 For each picture a simulation with one million steps was performed.
 The position of the particles in the last step were saved and a python script (using the library \texttt{matplotlib}) created an image.
 
-\subsubsection{Two-dimensional case with Coulomb potential}
+\subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_vis}
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{figures/Kristall_3_beta_500.pdf}
@@ -536,7 +553,7 @@ Sometimes two particles with the same charge are very close together.}
 \centering
 \includegraphics[scale=1]{figures/Beta_100_LJ.pdf}
 \caption{Final state for $\beta = 100$.
-As described in chapter \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
+As described in section \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
 Another difference compared to the Coulomb potential is the attraction of particles with the same charge.
 The reason is that the Lennard-Jones potential does not depend on the charge.
 Additionally the form of the grid is triangular and not quadrangular as in the Coulomb case.
