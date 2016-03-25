@@ -355,10 +355,12 @@ For computational simplicity all quantities are considered to be dimensionless a
 		The Lennard-Jones potential describes the inter-atomic potential between a pair of neutral atoms interacting via attractive Van der Waals forces $V_\mathrm{VdW} \propto r^{-6}$ and a repulsive contribution due to the Pauli exclusion principle $V_\mathrm{Pauli} \propto r^{-12}$.
 		Without loss of generality one can assume the functional form
 		\begin{align*}
-			V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6} \, \text{.}
+			V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6}
 		\end{align*}
+		with a minimum of the potential at $r\approx \num{1.12}$.
 		This is depicted in figure \ref{fig:lennard_jones} and is similar to the Coulomb potential of oppositley charged particles.
 		However the Lennard-Jones potential is extremely short ranged due to its $r^{-6}$-dependence as compared to the $r^{-1}$-dependence of the Coulomb potential.
+				
 \end{description}
 
 \begin{figure}[p]
@@ -396,7 +398,7 @@ The temperature range of this simulation was chosen to be $\beta \in [1, 500]$, 
 Since this range consists of multiple orders of magnitude, the temperature is best depicted using a logarithmic axis.
 Therefore the simulated thermodynamic~$\beta$ should increase exponentially to achieve equally spaced points on the logarithmic axis.
 Explicitly the simulation starts at $\beta = 1.0$ and increases by approximately \SI{4}{\percent} for each step, which results in a total of 160 simulated temperatures on the range considered.
-Moreover for every thermodynamic~$\beta$ a total of \num{4000} chains (with $10^6$ samples each) were generated.
+Moreover for every thermodynamic~$\beta$ a total of \num{400} chains (with $10^6$ samples each) were generated.
 
 The resulting average pair-distance plot is given in figure \ref{Fig:Temp_dep_Cou2D}, where the red line gives the mean value of the average pair-distance over all chains at a fixed temperature and analogously the red band the range of one standard deviation at either side of the mean.
 
@@ -409,7 +411,7 @@ The resulting average pair-distance plot is given in figure \ref{Fig:Temp_dep_Co
 \end{figure}
 
 Generally the diagram can be split into three distinct parts, which will be analyzed in the following paragraphs.
-For a better understanding one can take a look at the figures in section \ref{sec:Visualisation}.
+For a better understanding one can take a preemptive look at the figures in section \ref{sec:Visualisation}.
 \begin{description}
 	\item[Gaseous state $(\beta \lesssim 10^1)$] 
 		The average pair-distance is high for high temperatures or equivalently small $\beta$.
@@ -446,8 +448,8 @@ For a better understanding one can take a look at the figures in section \ref{se
 \subsubsection{Coulomb potential with hard core in three dimensions}
 Similarly to the previous section, the canonical ensemble is simulated using the Coulomb potential between particles with hard cores (still using 20 positively and 20 negatively charged particles).
 However this time the particles are considered to be in a three-dimensional box instead of a two-dimensional plane.
-To get a particle density that is comparable to the two-dimensional case, the side-length of the box was reduced to \num{8.0}.
-The temperature range is unchanged and each simulated chain still contains $10^6$ samples, but the number of chains at each fixed temperature could be reduced to \num{2400} to obtain sufficient results.
+To get a particle density that is comparable to the two-dimensional case, the side length of the box was reduced to \num{8.0}.
+The temperature range is unchanged and each simulated chain still contains $10^6$ samples, but the number of chains at each fixed temperature could be reduced to \num{240} to obtain sufficient results.
 The resulting average pair-distance is depicted in figure \ref{fig:temp_dep_cou3d}.
 \begin{figure}[h]
 	\centering
@@ -464,24 +466,38 @@ These can be attributed to the additional degree of freedom in the particle's mo
 Moreover the sphere packing density in three dimensions is bigger than in the two-dimensional case and thus lead to smaller variations in the calculated average pair-distance at low temperatures.
 
 
-\subsubsection{Two-dimensional case with Lennard-Jones potential}
-If the Coulomb potential is exchanged with a Lennard-Jones potential \remark{Gleichung referenzieren} the dependence on $\beta$ changes.
-The settings for the plot in figure \ref{Fig:Temp_dep_LJ2D} are basically the same as for the plot in figure \ref{Fig:Temp_dep_Cou2D} but the underlying potential is now a Lennard-Jones potential.
-One can clearly see that the behavior for low values of $\beta$ is the same as for the Coulomb potential.
-For higher values of $\beta$ the average pair-distance drops.
-After the average pair-distance reaches its smallest value it begins to rise again.
-%The Lennard-Jones potential has only a short range.
-The short range of the Lennard-Jones potential is responsible for this behaviour since some crystal-like state can form but once it has formed it stays on the same place and can not connect with other crystals which are formed somewhere else. \remark{Hier mehr?!}
-Some pictures of the final states can be found in section \ref{sec:Visualisation}.
-
-\begin{figure}
+\subsubsection{Lennard-Jones potential in two dimensions}
+For the simulation of the Lennard-Jones potential in two dimensions the side length of the box was chosen to be \num{12.0} and a total of 40 neutral particles were considered.
+In addition to this the simulated temperature range was shifted to $\beta \in [0.1, 100.0]$ to enclose the phase-transitions of the ensemble.
+On this range a total of 180 temperatures with 150 chains per step were simulated.
+Each chain contains \num{200000} samples.
+The resulting average pair-distance is depicted in figure \ref{Fig:Temp_dep_LJ2D}.
+\begin{figure}[h]
 	\centering
 	\includegraphics{./figures/temp_dep_lennard_jones2d.pdf}
-	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
+	\caption{Temperature dependence of the average pair-distance for the Lennard-Jones potential in two dimensions.
+		A total of 40 neutral particles in a box with side length 12.0 were simulated.}
 	\label{Fig:Temp_dep_LJ2D}
 \end{figure}
-
-
+As before the diagram can be split into three distinct parts:
+\begin{description}
+	\item[Gaseous state $(\beta \lesssim 2)$]
+		For high temperatures the behavior of the average pair-distance mirrors the one for the case of a Coulomb inter-particle potential.
+		In this temperature range the particles form a gaseous state with a homogeneous distribution of particles.
+		This state is barely affected by the type of potential used in the simulation.
+	
+	\item[Liquid state $(2 \lesssim \beta \lesssim 7)$]
+		For intermediate temperatures the particles start to form small clusters and chains in a liquid-like state and thus reducing the average pair-distance.
+		A notable difference to the Coulomb case is, that the average pair-distance decreases more quickly because the Lennard-Jones force is always attractive at intermediate and long ranges.
+		In contrast to this, the Coulomb force is always repulsive for oppositely charged particles which leads to a less rapid decrease of the average pair-distance during the phase-transition from gas to liquid state.		
+	
+	\item[Solid state $(\beta \gtrsim 7)$]
+		At a thermodynamic $\beta$ of approximately 8 the particles form a densely packed cluster and thus minimizing the average pair-distance in a solid-like state.
+		A remarkable behavior sets in at even lower temperatures, where the average pair-distance starts to rise again (with large uncertainties).
+		This is due to the formation of several smaller clusters in the simulated volume, which cannot merge due to the Lennard-Jones forced being extremely short-ranged.
+		For lower higher temperatures in the solid state regime this does not occur, since the remaining thermal movement of the particles tends to merge smaller clusters into a single one and thus reducing the average pair-distance and its variance.	
+\end{description}
+Some visualizations of simulated states for different temperatures are given in the following section \ref{sec:Visualisation}.
 
 \subsubsection{Three-dimensional case with Lennard-Jones potential}
 \begin{figure}
@@ -591,9 +607,8 @@ The position of the particles in the last step were saved and a python script (u
 
 
 \remark{3D Visualization?}
-\section{Further Analysis} \label{sec:Further_Analysis}
 
-
+\clearpage
 \section{Conclusion}
 
 In summary, it can be stated that the project was a success.
