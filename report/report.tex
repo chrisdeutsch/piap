@@ -460,15 +460,16 @@ The resulting average pair-distance is depicted in figure \ref{fig:temp_dep_cou3
 \end{figure}
 
 The general behavior of the mean of the average pair-distance is similar to the two-dimensional case.
-Therefore the explanations of the phase-transitions of the ensemble transfer to the three-dimensional case.
+Therefore the explanations of the phase transitions of the ensemble transfer to the three-dimensional case.
 Nevertheless significant differences in the calculated standard deviations in the low temperature regimes can be observed.
 These can be attributed to the additional degree of freedom in the particle's movement, which leads to a higher probability of resolving the crystallographic defects during the formation of a lattice.
 Moreover the sphere packing density in three dimensions is bigger than in the two-dimensional case and thus lead to smaller variations in the calculated average pair-distance at low temperatures.
 
 
 \subsubsection{Lennard-Jones potential in two dimensions}
+\label{sec:lennard_jones_2d}
 For the simulation of the Lennard-Jones potential in two dimensions the side length of the box was chosen to be \num{12.0} and a total of 40 neutral particles were considered.
-In addition to this the simulated temperature range was shifted to $\beta \in [0.1, 100.0]$ to enclose the phase-transitions of the ensemble.
+In addition to this the simulated temperature range was shifted to $\beta \in [0.1, 100.0]$ to enclose the phase transitions of the ensemble.
 On this range a total of 180 temperatures with 150 chains per step were simulated.
 Each chain contains \num{200000} samples.
 The resulting average pair-distance is depicted in figure \ref{Fig:Temp_dep_LJ2D}.
@@ -489,7 +490,7 @@ As before the diagram can be split into three distinct parts:
 	\item[Liquid state $(2 \lesssim \beta \lesssim 7)$]
 		For intermediate temperatures the particles start to form small clusters and chains in a liquid-like state and thus reducing the average pair-distance.
 		A notable difference to the Coulomb case is, that the average pair-distance decreases more quickly because the Lennard-Jones force is always attractive at intermediate and long ranges.
-		In contrast to this, the Coulomb force is always repulsive for oppositely charged particles which leads to a less rapid decrease of the average pair-distance during the phase-transition from gas to liquid state.		
+		In contrast to this, the Coulomb force is always repulsive for oppositely charged particles which leads to a less rapid decrease of the average pair-distance during the phase transition from gas to liquid state.		
 	
 	\item[Solid state $(\beta \gtrsim 7)$]
 		At a thermodynamic $\beta$ of approximately 8 the particles form a densely packed cluster and thus minimizing the average pair-distance in a solid-like state.
@@ -499,111 +500,154 @@ As before the diagram can be split into three distinct parts:
 \end{description}
 Some visualizations of simulated states for different temperatures are given in the following section \ref{sec:Visualisation}.
 
-\subsubsection{Three-dimensional case with Lennard-Jones potential}
+\subsubsection{Lennard-Jones potential in three dimensions}
+Lastly the three-dimensional case of the Lennard-Jones potential is considered.
+Except for the side length of the simulated box, which was decreased to 5.0 to get approximately the same density of particles, all parameters of the simulation are identical to the two-dimensional case.
+The corresponding average pair-distance plot is shown in figure \ref{Fig:Temp_dep_LJ3D}.
 \begin{figure}
 	\centering
 	\includegraphics{./figures/temp_dep_lennard_jones3d.pdf}
-	\caption{Temperature dependence 3d case \remark{Lennard Jones 2D?}}
+	\caption{Temperature dependence of the average pair-distance for the Lennard-Jones potential in two dimensions.
+		A total of 40 neutral particles in a box with side length 5.0 were simulated.}
 	\label{Fig:Temp_dep_LJ3D}
 \end{figure}
 
+The phase transitions take place at approximately the same temperatures as for the two-dimensional case.
+However the behavior at very small temperatures differs significantly, which can be traced back to the parameters of the simulation.
+Since the box size was reduced to attain a similar particle density as in the two-dimensional case, the range of the Lennard-Jones force is sufficient to form a single cluster of particles at low temperatures.
+For a larger volume the behavior in figure \ref{Fig:Temp_dep_LJ2D} is reproduced.
 
+\subsection{Visualization of ensemble states} \label{sec:Visualisation}
+In this section a few visualization of sampled states are depicted.
+For all states depicted in this section a simulated volume with side length 15.0 was used.
 
-\subsection{Visualization} \label{sec:Visualisation}
-In this section a few examples of the resulting final states are shown.
-For each picture a simulation with one million steps was performed.
-The position of the particles in the last step were saved and a python script (using the library \texttt{matplotlib}) created an image.
-
-\subsubsection{Two-dimensional case with Coulomb potential} \label{sec:2d_coulomb_vis}
-
-\begin{figure}[p]
+\subsubsection{Coulomb potential with hard core in three dimensions} \label{sec:2d_coulomb_vis}
+\begin{figure}[hp]
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Kristall_3_beta_500.pdf}
-		\subcaption{Final state for $\beta = 500$. 
-		One can clearly see that this low temperature leads to a crystal (solid state). 
-		The average pair-distance is very small and regularly.
-		Another aspect is the quadrangular form of the grid (which is different for the Lennard-Jones potential as shown in 
-		Only a few crystallographic defects appear.}
+		\subcaption{Regular lattice for $\beta = 500$.}
+		\label{fig:coulomb_crystal}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Kristall_4_beta_500.pdf}
-		\subcaption{Final state again for $\beta = 500$. 
-		The average pair-distance is slightly larger and the lattice is not regularly.
-		A lot of crystallographic defects appear.
-		This is the reason for the large uncertainty which was discussed in section \ref{sec:Temp_Dep}.}
+		\subcaption{Lattice with defects for $\beta = 500$.}
+		\label{fig:coulomb_crystal_defects}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Fluid_1_beta_40.pdf}
-		\subcaption{Final state for $\beta = 40$.
-		A higher temperature leads to an amorphous state (fluid).
-		The average pair-distance is larger and the lattice is completely gone.
-		One can observe some strings and some particles which form a pair.}
+		\subcaption{Amorphous state for $\beta = 40$.}
+		\label{fig:coulomb_amorphous}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Gas_1_beta_10.pdf}
-		\subcaption{Final state for $\beta = 10$.
-		An even higher temperature leads to an gaseous state.
-		The average pair-distance is at its maximum since the particles are more or less randomly 		distributed over the whole box.
-		Additionally the strings which were observed at the amorphous state are now shorter.
-		Often two particles form a pair.}
+		\subcaption{Molecular gas for $\beta = 10$.}
+		\label{fig:coulomb_molecular}
+		\vspace*{0.3cm}
 	\end{subfigure}
+	\centering
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Plasma_1_beta_2.pdf}
-		\subcaption{Final state for $\beta = 2$.
-		At very high temperatures the particles are in a plasma-like state since the particles rarely form pairs.
-		Sometimes two particles with the same charge are very close together.}
+		\subcaption{Single particle gas (ionized) for $\beta = 2$.}
+		\label{fig:coulomb_ion}
+		\vspace*{0.3cm}
 	\end{subfigure}
-	\caption{Some pictures}	
+	\caption{Excerpt of simulated states of the canonical ensemble using the Coulomb potential with hard particle cores.}
+	\label{fig:coulomb_vis}
 \end{figure}
+In figure \ref{fig:coulomb_vis} some states of the canonical ensemble are visualized.
+In the following a short description of the depicted states is given.
+\begin{description}
+	\item[Figure \ref{fig:coulomb_crystal}]
+		Particles forming a crystal (solid state) without major defects at very low temperatures.
+		The average pair-distance is small for such states.
+		The lattice forms a quadrangular grid due to the repulsive contribution of particles of the same charge.
+		This is different for the Lennard-Jones potential.
+		Except for a small deformation, no crystallographic defects occur.
+	
+	\item[Figure \ref{fig:coulomb_crystal_defects}]
+		A solid state with a irregular lattice.
+		The average pair-distance is larger than in the case of a regular lattice.
+		These defects are a source of the large uncertainties of the average pair-distance as discussed in section \ref{sec:2d_coulomb_tempdep}.
+	
+	\item[Figure \ref{fig:coulomb_amorphous}]
+		An amorphous state (fluid) at intermediate temperatures.
+		The average pair-distance are smaller than for the gaseous case, because of small clusters and chains formed by the particles.
+		
+	\item[Figure \ref{fig:coulomb_molecular}] 
+		A state at higher temperatures forming a molecular gas (freely moving pairs of positive and negatively charged particles).
+		The average pair-distance is at its maximum, since the pairs are distributed homogeneously over the entire volume.
+	
+	\item[Figure \ref{fig:coulomb_ion}]
+		At very high temperatures the particle pairs break apart and the gas enters a plasma-like state with charged particles moving independently over the whole volume.
+		
+\end{description}
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
-
-
-
-\begin{figure}[!h]
+In figure \ref{fig:lj_vis} some states of the canonical ensemble are visualized.
+In the following a short description of the depicted states is given.
+\begin{figure}[h]
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Beta_100_LJ.pdf}
-		\subcaption{Final state for $\beta = 100$.
-		As described in section \ref{sec:Temp_Dep} the final state of the system for a high value of $\beta$ is the formation of some small crystals which do not combine since the Lennard-Jones potential has a very short range.
-		Another difference compared to the Coulomb potential is the attraction of particles with the same charge.
-		The reason is that the Lennard-Jones potential does not depend on the charge.
-		Additionally the form of the grid is triangular and not quadrangular as in the Coulomb case.}
+		\subcaption{Densely packed clusters for $\beta = 100$.}
+		\label{fig:lj_multiple_clusters}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Beta_10_LJ.pdf}
-		\subcaption{Final state for $\beta = 10$.
-		Compared with the final state for $\beta=100$ the crystal is now bigger but the structure is more irregular.
-		Some particles seem to move freely inside the box.}
+		\subcaption{Single cluster for $\beta = 10$.}
+		\label{fig:lj_single_cluster}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Beta_5_LJ.pdf}
-		\subcaption{Final state for $\beta = 5$.
-		This state looks like the state where $\beta = 40$ in the Coulomb case.
-		Some particles pair together and form a chain.
-		One difference is again the formation of same charged particle pairs.}
+		\subcaption{Fluid-like state for $\beta = 5$.}
+		\label{fig:lj_chain}
+		\vspace*{0.3cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{figures/Beta_1_LJ.pdf}
-		\subcaption{Final state for $\beta = 1$.
-		The comparison with the final state where $\beta = 2$ in the Coulomb case seems reasonable.
-		In both cases are no regularly structures visible and the particles are evenly distributed over the whole box.
-		This is again the reason for the small uncertainty of the average pair-distance as shown in figure \ref{Fig:Temp_dep_LJ2D}.}
+		\subcaption{Single particle gas for $\beta = 1$.}
+		\label{fig:lj_gas}
+		\vspace*{0.3cm}
 	\end{subfigure}
-
+	\caption{Excerpt of simulated states of the canonical ensemble using the Lennard-Jones potential.}
+	\label{fig:lj_vis}
 \end{figure}
+\begin{description}
+	\item[Figure \ref{fig:lj_multiple_clusters}] 
+		Formation of densely packed clusters for small temperatures.
+		As described in section \ref{sec:lennard_jones_2d} the clusters are independent due to the short range of the Lennard-Jones potential.
+		As opposed to the Coulomb potential, the Lennard-Jones case does not contain any repulsive charges.
+		Therefore then particles form a triangular grid.
+		
+	\item[Figure \ref{fig:lj_single_cluster}]
+		At higher temperatures a single but more loosely packed cluster forms.
+	
+	\item[Figure \ref{fig:lj_chain}]
+		A fluid-like state with particles forming chains and pairs.
+		This is comparable to the amorphous state for the Coulomb potential.
+	
+	\item[Figure \ref{fig:lj_gas}] 
+		A single particle gas identical to the ionized gas of the Coulomb case.
+		In both cases no structures are visible and particles are evenly distributed in the volume.
+\end{description}
+
 
 
 \remark{3D Visualization?}
@@ -612,33 +656,32 @@ The position of the particles in the last step were saved and a python script (u
 \section{Conclusion}
 
 In summary, it can be stated that the project was a success.
-The results can be explained with the theory and the written program has worked properly.
-But in addition the project will be critically summarized.
-
+The results can be explained by theory and the program has worked properly.
+Nevertheless the project will be critically summarized.
 \begin{description}
 \item[Theory]
-The underlying physical theory is not complicated since it is basically the analysis of a potential.
-In contrast to that the understanding of the computational physics theory was more difficult.
-But, since the idea of this project is to learn more about computational physics, the distribution of the focal points was good.
-The suggested algorithm is a good instrument to analyze statistical ensembles how they occur in statistical mechanics.
+	The underlying theory known from statistical mechanics was not very demanding, since a probabilistic solution was employed.
+	In contrast to that understanding theory behind the computational aspects of the problem was very interesting.
+	Therefore this project is a good fit for learning more about computational physics, especially for sampling from multidimensional distributions.
+	The suggested algorithm is a good instrument to analyze the various ensembles as they occur in statistical mechanics.
 
 \item[Implementation]
-Once the concept of the Random-Walk Metropolis algorithm was understand, the implementation was not difficult.
-The implementation of a very general program was natural.
-With this general implementation it was easy to exchange the potentials and to add one more dimension.
+	Once the concept of the Random-Walk Metropolis algorithm was understood, the realization in an efficient implementation was not difficult.
+	Moreover a generic approach was employed to enable the simulation of arbitrary potentials.
+	Therefore it was easy to extend the simulation to the three-dimensional case.
 
 \item[Generation of Data]
-Since one needs a lot of data to gain reasonable results, this part was a bit lengthy (the total computation time were several days).
-But in the end the results are very precise and satisfying therefore the long computation time was a good investment.
+	The $d(\beta)$-plots are very demanding in terms of the computation time needed to obtain smooth graphs.
+	Therefore the data used for this report was generated over several days to gain reasonable results.
+	Nevertheless the results show that the investment of a few days of computation time was worthwhile.
 
 \item[Analysis of the Results]
-After the data was created it had to be analyzed.
-With a few plots and animations one had a good overview about the structure behind the result.
-The behavior of the system in dependence of the temperature and the underlying potential can be explained very good.
+	The analysis of the generated data was straightforward.
+	Animating the states of the Metropolis algorithm gave a good insight into its behavior.
+	Moreover the results could easily be connected to the physical background.
 \end{description}
-
-As a final conclusion this project was very interesting but also challenging.
-The learning effect was high due to the high amount of self-reliant work.
+As a final conclusion this project gave great insight into the field of computational physics.
+Moreover the exploration of different approaches to solving the problem at hand was very interesting.
 
 \FloatBarrier
 % BIBLIOGRAPHY
