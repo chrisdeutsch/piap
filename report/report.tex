@@ -195,10 +195,9 @@ For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random 
 		
 	\item \textbf{Accept-reject step:}
 		Calculate the acceptance probability
-		\begin{align}
+		\begin{align*}
 			\alpha(x, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
-			\label{eq:acceptance_probability}
-		\end{align}
+		\end{align*}
 		Generate $u \sim \mathcal{U}(0, 1)$ and set the random sample~$x_{n+1}$ according to:
 		\begin{align*}
 			x_{n+1} = \begin{cases}
@@ -405,7 +404,7 @@ The resulting average pair-distance plot is given in figure \ref{Fig:Temp_dep_Co
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb2d.pdf}
 	\caption{Temperature dependence of the average pair-distance for a Coulomb potential with hard cores in two dimensions.
-		A total of 20 positively and 20 negatively charged particles in a box with side length 15.0.}
+		A total of 20 positively and 20 negatively charged particles in a box with side length 15.0 were simulated.}
 	\label{Fig:Temp_dep_Cou2D}
 \end{figure}
 
@@ -444,12 +443,25 @@ For a better understanding one can take a look at the figures in section \ref{se
 \end{description}
 
 
-\subsubsection{Three-dimensional case with Coulomb potential}
-\begin{figure}
+\subsubsection{Coulomb potential with hard core in three dimensions}
+Similarly to the previous section, the canonical ensemble is simulated using the Coulomb potential between particles with hard cores (still using 20 positively and 20 negatively charged particles).
+However this time the particles are considered to be in a three-dimensional box instead of a two-dimensional plane.
+To get a particle density that is comparable to the two-dimensional case, the side-length of the box was reduced to \num{8.0}.
+The temperature range is unchanged and each simulated chain still contains $10^6$ samples, but the number of chains at each fixed temperature could be reduced to \num{2400} to obtain sufficient results.
+The resulting average pair-distance is depicted in figure \ref{fig:temp_dep_cou3d}.
+\begin{figure}[h]
 	\centering
 	\includegraphics{./figures/temp_dep_coulomb3d.pdf}
-	\caption{Temperature dependence 3d case}
+	\caption{Temperature dependence of the average pair-distance for a Coulomb potential with hard cores in three dimensions.
+		A total of 20 positively and 20 negatively charged particles in a box with side length 8.0 were simulated.}
+	\label{fig:temp_dep_cou3d}
 \end{figure}
+
+The general behavior of the mean of the average pair-distance is similar to the two-dimensional case.
+Therefore the explanations of the phase-transitions of the ensemble transfer to the three-dimensional case.
+Nevertheless significant differences in the calculated standard deviations in the low temperature regimes can be observed.
+These can be attributed to the additional degree of freedom in the particle's movement, which leads to a higher probability of resolving the crystallographic defects during the formation of a lattice.
+Moreover the sphere packing density in three dimensions is bigger than in the two-dimensional case and thus lead to smaller variations in the calculated average pair-distance at low temperatures.
 
 
 \subsubsection{Two-dimensional case with Lennard-Jones potential}
