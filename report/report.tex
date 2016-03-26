@@ -140,18 +140,13 @@ Additionally the behavior of the system is analyzed for the two and three-dimens
 % CONTENT
 
 \section{Introduction}
-This report summarizes the results of the analysis of a two-dimensional system where only two kind of particles, a positive and a negative one are considered.
-They interact via a potential which is given by
-\begin{equation}
-V_{ij} = \frac{q_i q_j}{\left| \vec{r}_i - \vec{r}_j \right|} + \frac{1}{\left| \vec{r}_i - \vec{r}_j \right|^8} \, \text{.} \label{Eq:Potential}
-\end{equation}
-For the analysis a Random-Walk Metropolis algorithm is used. It will be explained in section \ref{sec:Metropolis}.
-The used algorithm depends on the temperature and this dependence is studied in section \ref{sec:Temperature}.
-As an indicator for the phase of the system the average pair-distance is monitored.
-A visualization of the different phases was also done and can be found in the section \ref{sec:Visualisation}.
-In addition to that some further researches with other potentials (e.g. Lennard-Jones potential) were done and the behavior of this system in three dimensions was also analyzed.
-These further thoughts and results are explained in section \ref{sec:Further_Analysis}.
+This report shall be concerned with the simulation and analysis of the canonical ensemble of particles interacting via different inter-particle potentials.
+The potentials considered in the analysis are the Coulomb potential of charged particles with hard cores and the Lennard-Jones potential of neutral particles.
+For the simulation of the ensemble the Random-Walk Metropolis algorithm is used, which is a Marko-Chain Monte-Carlo method and will be introduced in section \ref{sec:Metropolis}.
 
+The emphasis of this report lies in the analysis of the temperature dependence of the canonical ensemble, with respect to phase transitions occurring at specific temperatures.
+As an indicator of the phase of the ensemble an observable, the average pair-distance, is monitored over a range of temperatures.
+Moreover the behavior of the ensemble in two and three-dimensions is analyzed and some visualizations of states explaining the different phases are created.
 
 \section{Background}
 
