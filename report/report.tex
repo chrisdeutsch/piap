@@ -195,13 +195,14 @@ For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random 
 		
 	\item \textbf{Accept-reject step:}
 		Calculate the acceptance probability
-		\begin{align*}
+		\begin{align}
 			\alpha(x, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
-		\end{align*}
+			\label{eq:acceptance_probability}
+		\end{align}
 		Generate $u \sim \mathcal{U}(0, 1)$ and set the random sample~$x_{n+1}$ according to:
 		\begin{align*}
 			x_{n+1} = \begin{cases}
-					y_n \,, & u \leq \alpha(x_n, y_n) \\
+					y \,, & u \leq \alpha(x_n, y_n) \\
 					x_n \,, & u > \alpha(x_n, y_n)
 				\end{cases}
 		\end{align*}
@@ -213,14 +214,14 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 
 Finally one has to consider the influence of the proposal scheme on the behavior of the algorithm.
 A characteristic indicator of this is the mean acceptance rate in the accept-reject step.
-Generally, a small acceptance rate leads to slow mixing of the Markov-Chain, which means, that the state moves slowly through state-space.
+Generally, a small acceptance rate leads to slow mixing of the Markov-Chain, which means that the state moves slowly through state-space.
 Conversely a high acceptance gives rise to rapid mixing of the chain and a thorough exploration of the state-space.
 In addition to this, the algorithm is less likely to get stuck at a local mode of the target distribution.
 In practice one has to balance both effects to achieve optimal performance of the algorithm.
 It is suggested \cite{gilks_richardson}, that a mean acceptance rate in the interval~$[0.15, 0.5]$ leads to good performance.
 
 \section{Implementation} \label{sec:implementation}
-For the simulations of the canonical ensemble the programming language \texttt{C++} was used.
+For the simulations of the canonical ensemble programs written in the programming language \texttt{C++} were used.
 In the following a summary of the core implementation details is given.
 
 \subsection{Metropolis algorithm} \label{sec:Metropolis_alg}
@@ -286,7 +287,7 @@ In the following a detailed description of the implemented algorithm shall be gi
 \subsection{Proposal function} \label{sec:proposal_function}
 The proposal function contains an implementation of the proposal distribution, which occurs in the Metropolis algorithm.
 Its required arguments are a reference to a \texttt{ParticleState} representing the state of one particle, for which a new state according to the proposal distribution should be chosen.
-Moreover the function takes a reference to a random number generator, which is used to create random variables for sampling from the proposal distribution.
+Moreover the function takes a reference to a random number generator, that is used to create random variables for sampling from the proposal distribution.
 
 For illustration purposes consider the one dimensional case of a particle with charge~$q$ and a coordinate~$x$ on a line.
 A proposal distribution
@@ -323,7 +324,7 @@ The simulated data used in this report was generated using such a proposal schem
 To analyze the temperature dependence of the canonical ensemble using different inter-particle potentials, which will be introduced in section \ref{sec:Potentials}, the implementation as described in section~\ref{sec:implementation} is used.
 At first some important settings of the simulation, which vary depending on the case considered, shall be introduced.
 
-The initial state of the simulation is a random distribution of~$N$ charged or uncharged particles inside a two or three dimensional box with side length~$L$.
+The initial state of the simulation is a uniform distribution of~$N$ charged or uncharged particles inside a two or three dimensional box with side length~$L$.
 Since a random initial state is unprobable according to the target distribution, a burn-in phase discarding the first 1000 samples of the Markov-Chain will be employed.
 
 For monitoring the phase transitions of the ensemble, the average pair-distance (introduced in section \ref{sec:Temp_Dep}) can be observed over a specific temperature range or more precisely the thermodynamic~$\beta$, which needs to be set beforehand.
@@ -347,7 +348,7 @@ For computational simplicity all quantities are considered to be dimensionless a
 		\end{align*}
 		with particle charges~$q$ and position vectors~$\mathbf{r}$.
 		At intermediate ranges this force is attractive for oppositley charged particles and repulsive for particles of the same charge.
-		The general behavior of this potential is depicted in figure \ref{fig:coulomb_core} and the hard core of the potential is visible as the steep ascend of the potential energy at a distance of $r \approx 1$.
+		The general behavior of this potential is depicted in figure \ref{fig:coulomb_core}, in which the hard core of the potential is visible as the steep ascend of the potential energy at a distance of $r \approx 1$.
 		Moreover a prominent minimum of the potential for oppositley charged particles can be observed at $r \approx 1.35$.
 		This is approximately the lattice spacing of crystals formed at low temperatures, as can be seen in section \ref{sec:2d_coulomb_vis}.
 		
@@ -388,7 +389,7 @@ d = \frac{2}{N(N - 1)} \sum_{i<j} |\mathbf{r}_i - \mathbf{r}_j | \, \text{,}
 where $N$ is the number of particles and $\mathbf{r}_i$, $\mathbf{r}_j$ are the positions of the $i$-th and $j$-th particle.
 The calculation of the average pair-distance is only done every 20th step of the Markov-Chain in order to save computation time\footnote{A comparison between the calculation of the observable at every and every 20th step was done and no significant difference in the calculated expectation value was observed.}.
 The expectation value of the average pair-distance can then be determined and saved for later analysis.
-In order to estimate the uncertainty of the average pair-distance, the standard deviation and 0.05/0.95-quantiles of the expectation values from several chains at the same temperature is used.
+In order to estimate the uncertainty of the average pair-distance, the standard deviation and 0.05/0.95-quantiles of the expectation values from several chains at the same temperature are used.
 
 In the following sections the average pair-distance~$d$ was simulated for different thermodynamic~$\beta$ and is depicted in $d(\beta)$-graphs using bands to indicate the $1\sigma$-range and quantiles.
 
@@ -414,9 +415,9 @@ Generally the diagram can be split into three distinct parts, which will be anal
 For a better understanding one can take a preemptive look at the figures in section \ref{sec:Visualisation}.
 \begin{description}
 	\item[Gaseous state $(\beta \lesssim 10^1)$] 
-		The average pair-distance is high for high temperatures or equivalently small $\beta$.
+		The average pair-distance is large for high temperatures or equivalently small $\beta$.
 		One expects this behavior, since for high temperatures the system is in a gaseous state and the particles are homogeneously distributed in the whole volume of the box.
-		Therefore the average pair-distance is maximum in a gaseous system.
+		Therefore the average pair-distance is maximum in a gaseous state.
 		Moreover one observes small uncertainties in this temperature range because of the homogeneous distribution of the particles.
 	
 	\item[Liquid state $(10^1 \lesssim \beta \lesssim 10^2)$]
@@ -496,7 +497,7 @@ As before the diagram can be split into three distinct parts:
 		At a thermodynamic $\beta$ of approximately 8 the particles form a densely packed cluster and thus minimizing the average pair-distance in a solid-like state.
 		A remarkable behavior sets in at even lower temperatures, where the average pair-distance starts to rise again (with large uncertainties).
 		This is due to the formation of several smaller clusters in the simulated volume, which cannot merge due to the Lennard-Jones forced being extremely short-ranged.
-		For lower higher temperatures in the solid state regime this does not occur, since the remaining thermal movement of the particles tends to merge smaller clusters into a single one and thus reducing the average pair-distance and its variance.	
+		For higher temperatures in the solid state regime this does not occur, since the remaining thermal movement of the particles tends to merge smaller clusters into a single one and thus reducing the average pair-distance and its variance.	
 \end{description}
 Some visualizations of simulated states for different temperatures are given in the following section \ref{sec:Visualisation}.
 
@@ -581,14 +582,14 @@ In the following a short description of the depicted states is given.
 	
 	\item[Figure \ref{fig:coulomb_amorphous}]
 		An amorphous state (fluid) at intermediate temperatures.
-		The average pair-distance are smaller than for the gaseous case, because of small clusters and chains formed by the particles.
+		The average pair-distance is smaller than for the gaseous case, because of small clusters and chains formed by the particles.
 		
 	\item[Figure \ref{fig:coulomb_molecular}] 
 		A state at higher temperatures forming a molecular gas (freely moving pairs of positive and negatively charged particles).
-		The average pair-distance is at its maximum, since the pairs are distributed homogeneously over the entire volume.
+		The average pair-distance is at its maximum, since the pairs are distributed homogeneously in the entire volume.
 	
 	\item[Figure \ref{fig:coulomb_ion}]
-		At very high temperatures the particle pairs break apart and the gas enters a plasma-like state with charged particles moving independently over the whole volume.
+		At very high temperatures the particle pairs break apart and the gas enters a plasma-like state with charged particles moving independently in the volume.
 		
 \end{description}
 
