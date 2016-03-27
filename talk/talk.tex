@@ -99,7 +99,7 @@
 	\begin{columns}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\setlength\itemsep{1.0em}
+				\setlength\itemsep{1.5em}
 				\item statistical ensemble
 				\item systems with constant:
 				\begin{itemize}
@@ -138,8 +138,38 @@
 \end{frame}
 
 \begin{frame}{Metropolis algorithm}
-	Metropolis algorithm
+	\begin{itemize}
+		\setlength\itemsep{1.5em}
+		\item MCMC method for sampling from (complicated) distributions
+		\item correlated sequence of random samples
+		\begin{itemize}
+			\item used to approximate distribution
+		\end{itemize}
+		\item Random-Walk Metropolis
+	\end{itemize}
 
+\end{frame}
+
+\begin{frame}{Random-Walk Metropolis algorithm}
+	Given target density $P(x)$ and initial state $x_0$:
+	\vspace*{0.2cm}
+	\begin{enumerate}
+		\setlength{\itemsep}{1.5em}
+		\item Trial change:
+		\begin{itemize}
+			\item generate new state $y$ according to symmetric proposal distribution $q(Y|x_n)$
+		\end{itemize}
+		
+		\item Accept-reject:
+		\begin{itemize}
+			\item accept with probability:
+			\begin{align*}
+				\alpha = \min\left\{ \frac{P(y)}{P(x_n)}, 1 \right\}
+			\end{align*}
+		\end{itemize}
+		
+		\item Repeat
+	\end{enumerate}		
 \end{frame}
 
 \begin{frame}{Implementation}

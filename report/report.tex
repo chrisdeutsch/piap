@@ -191,7 +191,7 @@ For a given initial state~$x_0$ and target density~$P(x)$, a sequence of random 
 	\item \textbf{Accept-reject step:}
 		Calculate the acceptance probability
 		\begin{align}
-			\alpha(x, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
+			\alpha(x_n, y) = \min\left\{ \frac{P(y)}{P(x_n)}, 1\right\} \,\text{.}
 			\label{eq:acceptance_probability}
 		\end{align}
 		Generate $u \sim \mathcal{U}(0, 1)$ and set the random sample~$x_{n+1}$ according to:
