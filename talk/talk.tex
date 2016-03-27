@@ -173,7 +173,27 @@
 \end{frame}
 
 \begin{frame}{Implementation}
-	Implementation
+	\begin{columns}
+		\column[c]{0.5\textwidth}
+			\begin{itemize}
+				\item<1-> box with side length~$L$
+				\item<2-> random initial state
+				\item<3-> select particle at random and calculate contribution to potential energy~$V$
+				\item<4-> propose new state in box with side length~$\Delta$
+				\item<5-> accept with probability
+				\begin{align*}
+					\alpha = \exp\left[ -\beta (V_\mathrm{prop.} - V_\mathrm{cur.}) \right]
+				\end{align*}
+			\end{itemize}
+		\column[c]{0.5\textwidth}
+			\centering
+			\includegraphics<1>{./figures/impl_01.pdf}
+			\includegraphics<2>{./figures/impl_02.pdf}
+			\includegraphics<3>{./figures/impl_03.pdf}
+			\includegraphics<4>{./figures/impl_04.pdf}
+			\includegraphics<5>{./figures/impl_05.pdf}
+			\includegraphics<6>{./figures/impl_06.pdf}
+	\end{columns}
 \end{frame}
 
 
