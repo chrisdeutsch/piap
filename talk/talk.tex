@@ -72,7 +72,6 @@
 	\frametitle{Introduction - Particles in a Potential}
 		\begin{columns}
 		\column[c]{.50\textwidth}
-			\centering
 			Core of this project:
 			\begin{itemize}
 				\item positive and negative particles
@@ -226,6 +225,48 @@
 			\includegraphics<6>{./figures/Delta_setting_all.pdf}
 			\includegraphics<7>{./figures/Empty_setting.pdf}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Potentials -- Coulomb with hard core}
+	\centering
+	$V_{ij} = \frac{q_i q_j}{| \mathbf{r}_i - \mathbf{r}_j |} + \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^8}$
+	
+	
+	\includegraphics[height=0.5\textheight]{../report/figures/potential_coulomb.pdf}
+	\begin{columns}
+		\column[c]{0.5\textwidth}
+			\begin{itemize}
+				\item Hard core for $r < 1$
+				\item Coulomb dominates for $r \gg 1$
+			\end{itemize}
+		\column[c]{0.5\textwidth}
+			\begin{itemize}
+				\item Attractive for opposite charges ($r > 1$)
+				\item Minimum at $r\approx 1.35$
+			\end{itemize}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}{Potentials -- Lennard-Jones}
+	\centering
+	$V_{ij} = \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^{12}} - \frac{1}{| \mathbf{r}_i - \mathbf{r}_j |^6}$
+	
+	
+	\includegraphics[height=0.5\textheight]{../report/figures/potential_lennard_jones.pdf}
+	\begin{columns}
+		\column[c]{0.5\textwidth}
+			\begin{itemize}
+				\item No charge dependence
+				\item Extremely short ranged
+			\end{itemize}
+		\column[c]{0.5\textwidth}
+			\begin{itemize}
+				\item Always attractive ($r > 1$)
+				\item Minimum at $r\approx 1.12$
+			\end{itemize}
+	\end{columns}
+	
 \end{frame}
 
 % % % % % % % % % % % % Chris 4.2 Analysis & avg pair distance
@@ -398,11 +439,15 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Results -- Coulomb 2D}
+	\centering
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Results -- Coulomb 3D}
-	\centering	
-	\begin{figure}
+	\centering
 	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb3d.pdf}
-	\end{figure}
 \end{frame}
 
 
