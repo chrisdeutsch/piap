@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.2.2">
-<info created="D:20160328204648" modified="D:20160328214800"/>
+<info created="D:20160328220006" modified="D:20160328220006"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -255,60 +255,38 @@ h
 <layer name="alpha"/>
 <layer name="beta"/>
 <view layers="alpha beta" active="beta"/>
-<path layer="alpha" stroke="black" pen="heavier" rarrow="normal/normal">
-64 564 m
-64 512 l
-64 528 l
-</path>
-<path stroke="black" pen="heavier" rarrow="normal/normal">
-116 512 m
-64 512 l
-64 512 l
-</path>
-<path stroke="black" pen="heavier" rarrow="normal/normal">
-160 576 m
-160 528 l
-160 544 l
-</path>
-<path stroke="black" pen="heavier" rarrow="normal/normal">
+<path layer="alpha" matrix="1 0 0 1 120 28" stroke="black" pen="heavier" rarrow="normal/normal">
 208 528 m
 160 528 l
 160 528 l
 </path>
-<path stroke="black" pen="heavier" rarrow="normal/normal">
-136 504 m
-160 528 l
-</path>
-<path layer="beta" matrix="1 0 0 1 -172 -156" fill="1">
+<path matrix="1 0 0 1 -52 -128" fill="1">
 224 768 m
 224 608 l
 384 608 l
 384 768 l
 h
 </path>
-<path matrix="1 0 0 1 -4 -4" stroke="black" pen="heavier" rarrow="normal/normal">
-64 564 m
-64 512 l
-64 528 l
+<path layer="beta" matrix="1 0 0 1 20 -16" stroke="black" pen="heavier">
+184 632 m
+184 628 l
+188 628 l
+188 632 l
+h
 </path>
-<path matrix="1 0 0 1 -4 -4" stroke="black" pen="heavier" rarrow="normal/normal">
-116 512 m
-64 512 l
-64 512 l
+<path matrix="1 0 0 1 68 68" stroke="black" pen="heavier">
+188 568 m
+188 528 l
+228 528 l
+228 568 l
+h
 </path>
-<path matrix="1 0 0 1 -4 -4" stroke="black" pen="heavier" rarrow="normal/normal">
-160 576 m
-160 528 l
-160 544 l
-</path>
-<path matrix="1 0 0 1 -4 -4" stroke="black" pen="heavier" rarrow="normal/normal">
-208 528 m
-160 528 l
-160 528 l
-</path>
-<path matrix="1 0 0 1 -4 -4" stroke="black" pen="heavier" rarrow="normal/normal">
-136 504 m
-160 528 l
+<path matrix="1 0 0 1 -8 0" stroke="black" pen="heavier">
+224 560 m
+224 488 l
+296 488 l
+296 560 l
+h
 </path>
 </page>
 </ipe>
