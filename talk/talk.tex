@@ -176,13 +176,17 @@
 	\begin{columns}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\item<1-> box with side length~$L$
+				\setlength{\itemsep}{1.5em}
 				\item<2-> random initial state
-				\item<3-> select particle at random and calculate contribution to potential energy~$V$
-				\item<4-> propose new state in box with side length~$\Delta$
-				\item<5-> accept with probability
+				\item<3-> select particle at random and calculate~$E_\mathrm{cur.}$
+				\item<4-> propose new state in box
+				\begin{itemize}
+					\item<5-> calculate~$E_\mathrm{prop.}$
+				\end{itemize}
+				\item<6-> accept with probability:
 				\begin{align*}
-					\alpha = \exp\left[ -\beta (V_\mathrm{prop.} - V_\mathrm{cur.}) \right]
+					\alpha &= \frac{P(E_\mathrm{prop.})}{P(E_\mathrm{cur.})}\\[.5em]
+					       &= \exp\left[ -\beta (E_\mathrm{prop.} - E_\mathrm{cur.}) \right]
 				\end{align*}
 			\end{itemize}
 		\column[c]{0.5\textwidth}
@@ -222,6 +226,26 @@
 % % % % % % % % % % % % Chris 4.2 Analysis & avg pair distance
 
 %Hier Folien
+\begin{frame}{Analysis of the temperature dependence}
+	\begin{itemize}
+		\setlength{\itemsep}{1.5em}
+		\item observable indicative of phase
+		\begin{itemize}
+			\item average pair-distance
+			\begin{align*}
+			d = \frac{1}{N(N-1)}\sum_{i \neq j} |\mathbf{r}_i - \mathbf{r}_i|
+			\end{align*}
+			\item evaluated every 20th sample
+		\end{itemize}
+		\item multiple sequences of random samples
+		\begin{itemize}
+			\item mean of expectation values
+			\item standard deviation
+			\item 0.05/0.95-quantiles
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
 
 
 % % % % % % % % % % % % Philip Coulomb 2D 3D & Visualizations
