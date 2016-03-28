@@ -10,4 +10,10 @@ cd build
 (MinGW)
 cmake -G "MinGW Makefiles" ..
 mingw32-make
-piap.exe
+-> run executable
+
+
+(Unix makefiles)
+cmake -G "Unix Makefiles" ..
+make
+-> run executable
