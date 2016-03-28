@@ -1,7 +1,0 @@
-Uniforme Verteilung
-400.000 Samples
-Boxgröße: 15
-100 Temperaturschritte
-99 Simulationen pro Temperatur
-
-Akzeptanzrate: ~30%
