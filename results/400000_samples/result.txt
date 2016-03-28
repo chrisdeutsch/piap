@@ -1,5 +1,0 @@
-100 Temperaturschritte
-100 Simulationen pro Temperatur
-400.000 Samples pro Simulationen
-
-Verbesserter Algorithmus

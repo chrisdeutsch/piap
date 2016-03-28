@@ -1,5 +1,0 @@
-Uniforme Verteilung
-300.000 Samples
-Boxgröße: 15
-100 Temperaturschritte
-60 Simulationen pro Temperatur

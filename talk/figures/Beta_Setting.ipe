@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.2.2">
-<info created="D:20160328223522" modified="D:20160328223522"/>
+<info created="D:20160328223522" modified="D:20160328230722"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -261,7 +261,7 @@ h
 384 768 l
 h
 </path>
-<path matrix="1 0 0 1 -37.8125 80.064" fill="red" fillrule="wind">
+<path matrix="0.691961 0 0 1 62.8478 81.5202" fill="red" fillrule="wind">
 295.23 511.238 m
 297.936 508.817
 298.747 508.04
@@ -440,7 +440,7 @@ h
 295.23 511.238 c
 h
 </path>
-<path matrix="1 0 0 1 -131.685 64.9917" fill="darkorange">
+<path matrix="0.691961 0 0 1 -2.10833 66.4479" fill="darkorange">
 413.212 486.732 m
 417.148 487.771
 419.784 488.662
@@ -594,7 +594,7 @@ h
 413.212 486.732 c
 h
 </path>
-<path matrix="1 0 0 1 -156.155 -14.6934" fill="yellow">
+<path matrix="0.691961 0 0 1 -19.0406 -13.2372" fill="yellow">
 437.599 566.485 m
 440.851 567.54
 442.718 568.309
@@ -750,7 +750,7 @@ h
 437.599 566.485 c
 h
 </path>
-<path matrix="0.527962 0 0 0.527962 187.049 312.706" fill="red" fillrule="wind">
+<path matrix="0.259024 0 0 0.374333 274.901 387.582" fill="red" fillrule="wind">
 295.23 511.238 m
 297.936 508.817
 298.747 508.04
@@ -929,7 +929,7 @@ h
 295.23 511.238 c
 h
 </path>
-<path matrix="0.527962 0 0 0.527962 137.488 304.748" fill="darkorange">
+<path matrix="0.259024 0 0 0.374333 250.586 381.94" fill="darkorange">
 413.212 486.732 m
 417.148 487.771
 419.784 488.662
@@ -1083,7 +1083,7 @@ h
 413.212 486.732 c
 h
 </path>
-<path matrix="0.527962 0 0 0.527962 124.569 262.677" fill="yellow">
+<path matrix="0.259024 0 0 0.374333 244.247 352.111" fill="yellow">
 437.599 566.485 m
 440.851 567.54
 442.718 568.309

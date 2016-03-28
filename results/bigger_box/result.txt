@@ -1,4 +1,0 @@
-100.000 samples
-100 Temperaturschritte
-100 Simulationen pro Temperatur
-Boxgröße: 20
