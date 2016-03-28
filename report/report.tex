@@ -209,8 +209,8 @@ Therefore this algorithm is suitable to sample from a canonical ensemble without
 
 Finally one has to consider the influence of the proposal scheme on the behavior of the algorithm.
 A characteristic indicator of this is the mean acceptance rate in the accept-reject step.
-Generally, a small acceptance rate leads to slow mixing of the Markov-Chain, which means that the state moves slowly through state-space.
-Conversely a high acceptance gives rise to rapid mixing of the chain and a thorough exploration of the state-space.
+Generally, a high acceptance rate leads to slow mixing of the Markov-Chain, which means that the state moves slowly through state-space.
+Conversely a low acceptance gives rise to rapid mixing of the chain and a thorough exploration of the state-space.
 In addition to this, the algorithm is less likely to get stuck at a local mode of the target distribution.
 In practice one has to balance both effects to achieve optimal performance of the algorithm.
 It is suggested \cite{gilks_richardson}, that a mean acceptance rate in the interval~$[0.15, 0.5]$ leads to good performance.
