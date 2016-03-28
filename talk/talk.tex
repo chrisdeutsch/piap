@@ -203,8 +203,25 @@
 
 % % % % % % % % % % % % Philip Intro Tempdep & Potentials
 
-%Hier Folien
-
+\begin{frame}
+	\frametitle{Temperature Dependence -- Settings}
+	\begin{columns}
+		\column[c]{0.5\textwidth}
+		Parameters:
+		\begin{itemize}
+			\item Dimensions
+			\item Size of box
+			\item Number of particles
+			\item Thermodynamical $\beta$
+			\item $\Delta$ (for proposal function)
+			\item Potential
+		\end{itemize}
+		\column[c]{0.5\textwidth}
+			\centering
+			\includegraphics<1>{./figures/Dim_setting_all.pdf}
+			\includegraphics<2>[width=\textwidth]{./figures/N_setting_all.pdf}
+	\end{columns}
+\end{frame}
 
 % % % % % % % % % % % % Chris 4.2 Analysis & avg pair distance
 
@@ -232,8 +249,157 @@
 
 
 % % % % % % % % % % % % Philip Coulomb 2D 3D & Visualizations
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D}
+	\centering	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
+	\pause
+	\put(-254,140){$\beta = 2$}
+	\put(-239,152){\vector(0,1){17}}
+	\end{figure}
+\end{frame}
 
-%Hier Folien
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D -- $\beta=2$}
+	\centering
+	\begin{columns}	
+	\column[c]{0.6\textwidth}
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/Plasma_1_beta_2.pdf}
+	\end{figure}
+	\column[c]{0.45\textwidth}
+	\begin{itemize}
+	\item No regular structure
+	\begin{itemize}
+		\item Sometimes equal charged particles are next to each other
+	\end{itemize}
+	\item Distributed over whole box
+	\item Large average pair-distance
+	\item Plasma-like state
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D}
+	\centering	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
+	\put(-192.5,138){$\beta = 10$}
+	\put(-177.5,150){\vector(0,1){17}}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D -- $\beta=10$}
+	\centering
+	\begin{columns}	
+	\column[c]{0.6\textwidth}
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/Gas_1_beta_10.pdf}
+	\end{figure}
+	\column[c]{0.5\textwidth}
+	\begin{itemize}
+	\item Negative and positive charged particles form pairs
+	\item Distributed over whole box
+	\item Again: large average pair-distance
+	\item Gaseous state
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D}
+	\centering	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
+	\put(-134,150){$\beta = 40$}
+	\put(-119,147){\vector(0,-1){17}}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D -- $\beta=40$}
+	\centering
+	\begin{columns}	
+	\column[c]{0.6\textwidth}
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/Fluid_1_beta_40.pdf}
+	\end{figure}
+	\column[c]{0.5\textwidth}
+	\begin{itemize}
+	\item No regular structure
+	\item Few chains formed
+	\item Smaller average pair-distance
+	\item Fluid state
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D}
+	\centering	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
+	\put(-80,170){$\beta = 500$}
+	\put(-41,167){\vector(1,-2){10}}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D -- $\beta=500$}
+	\centering
+	\begin{columns}	
+	\column[c]{0.6\textwidth}
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/Kristall_3_beta_500.pdf}
+	\end{figure}
+	\column[c]{0.5\textwidth}
+	\begin{itemize}
+	\item Regular lattice
+	\begin{itemize}
+		\item Quadrangular
+		\item Small deformation
+	\end{itemize}
+	\item Small average pair-distance
+	\item Solid state
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 2D -- $\beta=500$}
+	\centering
+	\begin{columns}	
+	\column[c]{0.6\textwidth}
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/Kristall_4_beta_500.pdf}
+	\end{figure}
+	\column[c]{0.5\textwidth}
+	\begin{itemize}
+	\item (Mostly) regular lattice
+	\begin{itemize}
+		\item Quadrangular
+		\item A lot of deformations
+	\end{itemize}
+	\item Average pair-distance is now larger
+	\item Solid state
+	\end{itemize}
+	Defects are a source of the large uncertainty!
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results -- Coulomb 3D}
+	\centering	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb3d.pdf}
+	\end{figure}
+\end{frame}
+
 
 
 % % % % % % % % % % % % Chris LJ 2D 3D & Visualizations
