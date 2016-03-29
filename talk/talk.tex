@@ -206,12 +206,13 @@
 		\column[c]{0.5\textwidth}
 		Parameters:
 		\begin{itemize}
-			\item<2-> Dimensions
-			\item<3-> Size of box
-			\item<4-> Number of particles
-			\item<5-> Thermodynamical $\beta$
-			\item<6-> $\Delta$ (for proposal function)
-			\item<7-> Potential
+			\setlength{\itemsep}{0.7em}
+			\item<2-> dimensions
+			\item<3-> size of box
+			\item<4-> number of particles
+			\item<5-> thermodynamical $\beta$
+			\item<6-> $\Delta$ (for proposal distribution)
+			\item<7-> potential
 		\end{itemize}
 		\column[c]{0.5\textwidth}
 			\centering
@@ -234,13 +235,13 @@
 	\begin{columns}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\item Hard core for $r < 1$
-				\item Coulomb dominates for $r \gg 1$
+				\item hard core for $r < 1$
+				\item coulomb dominates for $r \gg 1$
 			\end{itemize}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\item Attractive for opposite charges ($r > 1$)
-				\item Minimum at $r\approx 1.35$
+				\item attractive for opposite charges ($r > 1$)
+				\item minimum at $r\approx 1.35$
 			\end{itemize}
 	\end{columns}
 	
@@ -255,13 +256,13 @@
 	\begin{columns}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\item Neutral particles
-				\item Extremely short ranged
+				\item neutral particles
+				\item extremely short ranged
 			\end{itemize}
 		\column[c]{0.5\textwidth}
 			\begin{itemize}
-				\item Always attractive ($r > 1$)
-				\item Minimum at $r\approx 1.12$
+				\item always attractive ($r > 1$)
+				\item minimum at $r\approx 1.12$
 			\end{itemize}
 	\end{columns}
 	
@@ -314,13 +315,11 @@
 	\end{figure}
 	\column[c]{0.45\textwidth}
 	\begin{itemize}
-	\item No regular structure
-	\begin{itemize}
-		\item Sometimes equal charged particles are next to each other
-	\end{itemize}
-	\item Distributed over whole box
-	\item Large average pair-distance
-	\item Plasma-like state
+	\setlength{\itemsep}{1.3em}
+	\item no regular structure
+	\item distributed over whole box
+	\item large average pair-distance
+	\item plasma-like state
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -346,10 +345,11 @@
 	\end{figure}
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
-	\item Negative and positive charged particles form pairs
-	\item Distributed over whole box
-	\item Again: large average pair-distance
-	\item Gaseous state
+	\setlength{\itemsep}{1.3em}
+	\item negative and positive charged particles form pairs
+	\item distributed over whole box
+	\item again: large average pair-distance
+	\item gaseous state
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -374,10 +374,11 @@
 	\end{figure}
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
-	\item No regular structure
-	\item Few chains formed
-	\item Smaller average pair-distance
-	\item Fluid state
+	\setlength{\itemsep}{1.3em}
+	\item no regular structure
+	\item few chains formed
+	\item smaller average pair-distance
+	\item fluid state
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -402,13 +403,10 @@
 	\end{figure}
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
-	\item Regular lattice
-	\begin{itemize}
-		\item Quadrangular
-		\item Small deformation
-	\end{itemize}
-	\item Small average pair-distance
-	\item Solid state
+	\setlength{\itemsep}{1.5em}
+	\item regular lattice
+	\item small average pair-distance
+	\item solid state
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -424,14 +422,12 @@
 	\end{figure}
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
+	\setlength{\itemsep}{1.5em}
 	\item (Mostly) regular lattice
-	\begin{itemize}
-		\item Quadrangular
-		\item A lot of deformations
-	\end{itemize}
 	\item Average pair-distance is now larger
 	\item Solid state
 	\end{itemize}
+	\vspace{2em}
 	Defects are a source of the large uncertainty!
 \end{columns}
 \end{frame}
@@ -574,15 +570,16 @@
 \begin{frame}{Conclusion}
 	\begin{itemize}
 		\setlength{\itemsep}{1.5em}
-		\item Metroplis is a good instrument to analyze ensembles
+		\item Metropolis -- good instrument to analyze ensembles
 		\item Easy implementation
 		\item A lot of computation time ($d(\beta)$)
 		\item Average pair-distance $\rightarrow$ phase transition
 	\end{itemize}
-	\vspace{2em}
-	\centering
-	Thank you for your attention!
 \end{frame}
 
+\begin{frame}{Thank you}
+	\centering
+	{\LARGE Thank you for your attention!}
+\end{frame}
 
 \end{document}
