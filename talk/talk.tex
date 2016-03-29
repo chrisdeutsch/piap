@@ -75,7 +75,7 @@
 			Core of this project:
 			\begin{itemize}
 			\setlength\itemsep{1.5em}
-				\item positive and negative particles
+				\item particles in a box
 				\item interaction via potential
 				\item analysis with a Random-Walk Metropolis algorithm
 				\item study of temperature dependence
@@ -212,7 +212,7 @@
 			\item<4-> number of particles
 			\item<5-> thermodynamical $\beta$
 			\item<6-> $\Delta$ (for proposal distribution)
-			\item<7-> potential
+			\item<7-> inter-particle potential
 		\end{itemize}
 		\column[c]{0.5\textwidth}
 			\centering
@@ -316,10 +316,10 @@
 	\column[c]{0.45\textwidth}
 	\begin{itemize}
 	\setlength{\itemsep}{1.3em}
+	\item plasma-like state
 	\item no regular structure
 	\item distributed over whole box
-	\item large average pair-distance
-	\item plasma-like state
+	\item large avg. pair-distance
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -346,10 +346,10 @@
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
 	\setlength{\itemsep}{1.3em}
+	\item gaseous state (molecular gas)
 	\item negative and positive charged particles form pairs
 	\item distributed over whole box
-	\item again: large average pair-distance
-	\item gaseous state
+	\item again: large avg. pair-distance
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -375,10 +375,10 @@
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
 	\setlength{\itemsep}{1.3em}
+	\item fluid state	
 	\item no regular structure
 	\item few chains formed
-	\item smaller average pair-distance
-	\item fluid state
+	\item smaller avg. pair-distance
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -388,8 +388,8 @@
 	\centering	
 	\begin{figure}
 	\includegraphics[width=\textwidth]{../report/figures/temp_dep_coulomb2d.pdf}
-	\put(-80,170){$\beta = 500$}
-	\put(-41,167){\vector(1,-2){10}}
+	\put(-80,97){$\beta = 500$}
+	\put(-41,94){\vector(1,-2){10}}
 	\end{figure}
 \end{frame}
 
@@ -404,9 +404,9 @@
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
 	\setlength{\itemsep}{1.5em}
-	\item regular lattice
-	\item small average pair-distance
 	\item solid state
+	\item regular lattice
+	\item small avg. pair-distance	
 	\end{itemize}
 \end{columns}
 \end{frame}
@@ -423,9 +423,9 @@
 	\column[c]{0.5\textwidth}
 	\begin{itemize}
 	\setlength{\itemsep}{1.5em}
-	\item (Mostly) regular lattice
-	\item Average pair-distance is now larger
-	\item Solid state
+	\item solid state
+	\item (mostly) regular lattice
+	\item avg. pair-distance is now larger
 	\end{itemize}
 	\vspace{2em}
 	Defects are a source of the large uncertainty!
@@ -570,10 +570,10 @@
 \begin{frame}{Conclusion}
 	\begin{itemize}
 		\setlength{\itemsep}{1.5em}
-		\item Metropolis -- good instrument to analyze ensembles
-		\item Easy implementation
-		\item A lot of computation time ($d(\beta)$)
-		\item Average pair-distance $\rightarrow$ phase transition
+		\item metropolis -- good instrument to analyze ensembles
+		\item easy implementation
+		\item a lot of computation time $(d(\beta)$-plots)
+		\item average pair-distance $\rightarrow$ phase transition
 	\end{itemize}
 \end{frame}
 
